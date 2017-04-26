@@ -1,0 +1,65 @@
+<div id="commands">
+  <div class="row" ng-controller="RunsCtrl">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Lista playbooków</div>
+        <div class="panel-body">
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Dodaj</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="command in commands">
+                <td>{{command.id}}</td>
+                <td>{{command.name}}</td>
+                <td>
+                  <img src="img/info.png" title="{{command.desc}}" />
+                </td>
+                <td>
+                  <button class="btn btn-info glyphicon glyphicon-add-sign" ng-click="getToEdit($index)">
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Uruchamianie</div>
+        <div class="panel-body">
+          <div class="form-horizontal" role="form">
+
+            <div class="well"></div>
+            <div class="form-group">
+              <div class="col-sm-offset-1 col-sm-5">
+                <button type="submit" ng-click="alterCommand()" class="btn btn-success">Uruchom</button>
+              </div>
+              <div class="col-sm-offset-3 col-sm-3">
+                <button type="submit" ng-click="deleteCommand()" class="btn btn-danger">Zatrzymaj</button>
+              </div>
+            </div>
+          </div>
+          <div style="height:400px;background-color:black;">
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Historia</div>
+        <div class="panel-body">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

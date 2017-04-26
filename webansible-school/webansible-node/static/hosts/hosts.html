@@ -1,0 +1,131 @@
+<div class="row" ng-controller="hostsCtrl">
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Grupy i komputery <small> dodawanie, usuwanie i edycja</small></h4>
+    </div>
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col-md-6">
+          <select  class="form-control" id="activeGroup" ng-model="activeGroup"
+            ng-options="g.name for g in groups track by g.id"  ng-change="change()">
+          </select>
+        </div>
+        <div class="col-md-6">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success" ng-click="addGroupOpen()">
+              <span class="glyphicon glyphicon-plus"></span> Dodaj
+            </button>
+            <button type="button" class="btn btn-info" ng-click="editGroupOpen()">
+              <span class="glyphicon glyphicon-pencil"></span> Edytuj
+            </button>
+            <button type="button" class="btn btn-danger" ng-click="delGroup()">
+              <span class="glyphicon glyphicon-minus"></span> Usuń
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert" ng-show="openAdd">
+        <div class="input-group btn-xs">
+          <input type="text" class="form-control" ng-model="newGroupName"
+          placeholder="Nazwa grupy bez spacji" />
+          <span class="input-group-btn">
+                  <button class="btn btn-success" type="button"
+                   ng-click="addGroup()" >Dodaj!</button>
+                  <button class="btn btn-danger" type="button" ng-click="groupEditClose()">
+                  <span class="glyphicon glyphicon-remove-circle" ></span>
+          </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="alert" ng-show="openEdit">
+        <div class="input-group btn-xs">
+          <input type="text" class="form-control" ng-model="editGroupName"
+           placeholder="Nazwa grupy bez spacji" />
+          <span class="input-group-btn">
+                  <button class="btn btn-info" ng-click="editGroup()"
+                  type="button">Zmień!</button>
+                  <button class="btn btn-danger" type="button" ng-click="groupEditClose()">
+                  <span class="glyphicon glyphicon-remove-circle" ></span>
+          </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Dodawanie komputera</div>
+    <div class="panel-body">
+
+      <div class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Nazwa hosta
+          </label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  ng-model="editHostName"
+            placeholder="Nazwa hosta" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">IP lub domena
+          </label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  ng-model="editHostIp"
+            placeholder="223.232.12.123" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-3">
+            <button type="submit" class="btn btn-success" ng-click="addHost()">Dodaj</button>
+          </div>
+          <div class="col-sm-offset-3 col-sm-3">
+            <button type="submit" class="btn btn-default" ng-click="clearHostForm()" >Czyść</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Lista komputerów w grupie: <strong ng-bind="activeGroup.name"></strong></div>
+    <div class="panel-body">
+      <table class="table ">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Host</th>
+            <th>IP</th>
+            <th>Usuń</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="h in hosts">
+            <td>{{h.id}}</td>
+            <td>{{h.name}}</td>
+            <td>{{h.ip}}</td>
+            <td>
+              <button class="btn"  ng-click="delHost($index)">
+                <span class="glyphicon glyphicon-remove-sign"></span>Usuń
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>

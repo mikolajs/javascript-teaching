@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenWebAnsible</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="build/bootstrap.min.css"  />
+    <link rel="stylesheet" href="build/bootstrap-theme.css"  />
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+    <script src="build/jquery.min.js"></script>
+    <script src="build/remarkable.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Przełączanie</span> <span class="icon-bar"></span>
+        <span class="icon-bar"></span> <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="padding: 2px;" href="#"><img  src="openwebansible.png"/></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse"
+      id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="hosts.html">Hosty</a></li>
+        <li><a href="playbooks.html">Playbooki</a></li>
+      </ul>
+    </div>
+
+    <!-- /.navbar-collapse -->
+  </nav>
+
+
+  <div class="container" style="margin-top: 10px;">
+
+
+    <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Grupy komputerów <small> dodawanie, usuwanie i edycja</small></h4>
+        </div>
+        <div class="panel-body" id="hostGroup">  </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="panel panel-default"  id="hostInsert">
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+
+
+  <script type="text/babel" src="groups.js"></script>
+    <script type="text/babel" src="hosts.js"></script>
+<script src="build/bootstrap.min.js"></script>
+  </body>
+</html>
