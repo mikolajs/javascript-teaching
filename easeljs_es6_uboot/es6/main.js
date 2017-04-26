@@ -13,14 +13,14 @@ constructor(){
 
 init() {
 console.log("started init!");
-    this.back.graphics.beginFill("#55cc44");
+    this.back.graphics.beginFill("#3344cc");
     this.back.graphics.drawRect(0, 0,this.w, this.h);
     this.stage.addChild(this.back);
 
-  var  village = new createjs.Bitmap("files/village.png");
-  village.x =  350;
-  village.y =  350;
-  this.stage.addChild(village);
+  var  uboat = new createjs.Bitmap("files/boat.png");
+  uboat.x =  350;
+  uboat.y =  350;
+  this.stage.addChild(uboat);
 
 
   createjs.Ticker.setFPS(60);
