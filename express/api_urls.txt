@@ -1,0 +1,13 @@
+http://localhost:3000/api/get?t=g – get groups
+
+http://localhost:3000/api/get?t=h&id=1 – get hosts of id
+
+http://localhost:3000/api/ins?t=g&n=Nazwa – insert new group with name
+
+http://localhost:3000/api/ins?t=h&id=1&n=Nazwa&ip=IPADDRESS – insert host
+
+http://localhost:3000/api/alt?t=g&id=1&n=Nazwa – change name of group
+
+http://localhost:3000/api/del?t=g&id=1 – delete group
+
+http://localhost:3000/api/del?t=h&id=1 – delete host

@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+
+<link href="style.css" rel="stylesheet"  />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"  />
+</head>
+
+<body onload="init();">
+  <h1 id="score" style="display:none;"></h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9" style="min-height: 550px;">
+        <canvas id="demoCanvas" width="850" height="550"></canvas>
+        <div id="tileInfo">
+
+        </div>
+      </div>
+      <div class="col-lg-3">
+
+        <label> Ilość stad:<input type="number" value="6" max="12" min="1" id="numHerds"/></label><br />
+        <button class="btn btn-info" onclick="start()">Start</button>
+        <ul class="infoList">
+          <li>
+            Mięso:<span id="meat">0</span>
+          </li>
+          <li>
+            Mleko:<span id="milk">0</span>
+          </li>
+          <li>
+            Wełna:<span id="wool">0</span>
+          </li>
+        </ul>
+        <p>
+          Owiec: <span id="sheep"></span>
+        </p>
+       <p>
+         Dni: <span id="days">0</span>
+       </p>
+      </div>
+    </div>
+
+
+
+  </div>
+    <script src="js/units.js"></script>
+    <script src="js/herdholder.js"></script>
+  <script src="js/sheep.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/map.js"></script>
+</body>
+</html>

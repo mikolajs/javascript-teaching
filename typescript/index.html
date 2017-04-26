@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+       <h2>Podatek od złudzeń</h2>
+    </div>
+  </nav>
+
+
+  <div class="container" style="margin-top: 10px;">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-3">
+  <div class="input-group">
+  <span class="input-group-addon" >Ile liczy zestaw liczb:</span>
+  <input type="text" class="form-control" onchange="lotto.refresh()"
+  placeholder="wpisz liczbę" id="zestaw"/>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="input-group">
+<span class="input-group-addon" >Ile skreślamy:</span>
+<input type="text" class="form-control" onchange="lotto.refresh()"
+placeholder="wpisz liczbę" id="losy"/>
+</div>
+</div>
+</div>
+<hr/>
+<div class="row">
+<div class="col-lg-3"></div>
+  </div>
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+  <p class="bg-info" id="szansa">...</p>
+</div>
+  <div class="col-lg-3"></div>
+</div>
+</div>
+
+<script src="script.js"></script>
+  <script src="js/boostrap.min.js"></script>
+</body>
+</html>
