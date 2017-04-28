@@ -12,14 +12,18 @@ constructor(){
 
 
 init() {
-console.log("started init!");
-    this.back.graphics.beginFill("#3344cc");
+    console.log("started init!");
+    var bg = new createjs.Bitmap("files/background.png");
+    var m = new createjs.Matrix2D();
+    m.translate(this.w, this.y);
+    m.scale(this.w/bg.width, this.h/bg.height);
+    this.back.graphics.beginStroke("black").beginBitmapFill(bg, "no-repeat", m);
     this.back.graphics.drawRect(0, 0,this.w, this.h);
     this.stage.addChild(this.back);
 
-  var  uboat = new createjs.Bitmap("files/boat.png");
-  uboat.x =  350;
-  uboat.y =  350;
+  var  uboat = new createjs.Bitmap("files/uboatL.png");
+  uboat.x =  450;
+  uboat.y =  550;
   this.stage.addChild(uboat);
 
 

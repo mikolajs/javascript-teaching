@@ -8,27 +8,18 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.css$/, loader: "style-loader!css-loader" },
+            { test: /\.css$/, loader: "style-loader!css-loader" } /*,
 	    { test: /\.jpg$/,
 	      exclude: /node_modules/,
 	      loader: 'file-loader'  }, 
 	    { test: /\.png$/,
 	       exclude: /node_modules/,
 	       loader: 'file-loader'
-	    }
+	    }*/
         ],
  	rules: [
-    	{
-      	test: /\.js$/,
-      	exclude: /(node_modules|bower_components)/,
-      	use: {
-        	loader: 'babel-loader',
-       		 options: {
-          	presets: ['env']
-        }
-      }
-    }
-  ]
+         { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+        ]
     },
     plugins: [
          new BrowserSyncPlugin({

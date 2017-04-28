@@ -68,19 +68,11 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
+class Main {
 
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Main = function () {
-  function Main() {
-    _classCallCheck(this, Main);
-
+  constructor() {
     this.stage = new createjs.Stage("demoCanvas");
     this.w = this.stage.canvas.width;
     this.h = this.stage.canvas.height;
@@ -90,34 +82,33 @@ var Main = function () {
     this.init();
   }
 
-  _createClass(Main, [{
-    key: "init",
-    value: function init() {
-      console.log("started init!");
-      this.back.graphics.beginFill("#55cc44");
-      this.back.graphics.drawRect(0, 0, this.w, this.h);
-      this.stage.addChild(this.back);
+  init() {
+    console.log("started init!");
+    var bg = new createjs.Bitmap("files/background.png");
+    var m = new createjs.Matrix2D();
+    m.translate(this.w, this.y);
+    m.scale(this.w / bg.width, this.h / bg.height);
+    this.back.graphics.beginStroke("black").beginBitmapFill(bg, "no-repeat", m);
+    this.back.graphics.drawRect(0, 0, this.w, this.h);
+    this.stage.addChild(this.back);
 
-      var village = new createjs.Bitmap("files/village.png");
-      village.x = 350;
-      village.y = 350;
-      this.stage.addChild(village);
+    var uboat = new createjs.Bitmap("files/uboatL.png");
+    uboat.x = 450;
+    uboat.y = 550;
+    this.stage.addChild(uboat);
 
-      createjs.Ticker.setFPS(60);
-      createjs.Ticker.addEventListener("tick", this.handleTick.bind(this));
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.addEventListener("tick", this.handleTick.bind(this));
+    this.stage.update();
+  }
+
+  handleTick(event) {
+    if (!event.paused) {
       this.stage.update();
     }
-  }, {
-    key: "handleTick",
-    value: function handleTick(event) {
-      if (!event.paused) {
-        this.stage.update();
-      }
-    }
-  }]);
+  }
 
-  return Main;
-}();
+}
 
 var main = new Main();
 
