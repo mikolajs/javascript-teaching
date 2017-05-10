@@ -1,5 +1,6 @@
 
 export class Torpedo {
+  
   constructor(nr){
     this.nr = nr;
     this.x = 0;
@@ -17,7 +18,7 @@ export class Torpedo {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
-    console.log("Torpedo launched! " + this.nr);
+    //console.log("Torpedo launched! " + this.nr);
   }
 
   refresh(time){
@@ -29,6 +30,6 @@ export class Torpedo {
         this.isGo = false;
       }
     }
-
   }
+
 }

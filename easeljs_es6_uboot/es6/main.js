@@ -15,9 +15,8 @@ class Main {
     this.init();
   }
 
-
   init() {
-    console.log("started init!");
+    //console.log("started init!");
     var bg = new createjs.Bitmap("files/background.png");
     this.back.graphics.beginStroke("black").beginFill("blue").beginBitmapStroke(bg);
     this.back.graphics.drawRect(0, 0,this.w, this.h);
@@ -28,6 +27,9 @@ class Main {
     this.stage.addChild(this.uboat.torps[0].image);
     this.stage.addChild(this.uboat.torps[1].image);
     this.stage.addChild(this.uboat.torps[2].image);
+    for(let i = 0; i < this.boat.bars.length; i++)
+        this.stage.addChild(this.boat.bars[i].image);
+
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick",
     this.handleTick.bind(this));
@@ -41,7 +43,6 @@ class Main {
       this.stage.update();
     }
   }
-
 
 }
 
