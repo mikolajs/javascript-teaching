@@ -13,22 +13,24 @@ export class Boat {
 	  this.imgs = [];
 	  this.imgs[0] = new createjs.Bitmap("files/boatL.png");
 	  this.imgs[1] = new createjs.Bitmap("files/boatR.png");
-	  this.image = new createjs.Bitmap("files/boatL.png");
+	  this.image = this.imgs[0];
 	  this.left = true;
-     this.image.x = this.x;
-     this.image.y = this.y;
-     this.isGo = false;
-     this.start = 0;
+    this.image.x = this.x;
+    this.image.y = this.y;
+    this.isGo = false;
+    this.start = 0;
 	 // this.printXY();
-	 this.bars = [];
-	 for(let i = 1; i <= 5; i++){
-		 this.bars[i] = new Barrel(i);
-	 }
-	 // this.printCanvasSize();
+	  this.bars = [];
+	  for(let i = 1; i <= 5; i++){
+		  this.bars[i] = new Barrel(i);
+	  }
+	 this.testPlaces();
   }
 
   refresh(time) {
       if(this.isGo) {
+				this.barrels = 5;
+				//drop barrels !!!!!!!!!!!!!
 				//this.printXY();
          if(this.left) {
             this.moveLeft();
@@ -70,17 +72,26 @@ export class Boat {
    printXY(){
 	  console.log("XY: (" + this.x + " ; " + this.y + ")");
   }
-/// under work!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/// under work!
 	_randomPlaces() {
 		var a = [0,0,0,0,0];
 		let isUnique = false;
 		for(let i = 0; i < 5; i++){
-			while(a[i]) {
-				a[i] = Math.floor(Math.random() * 10 + 1);
+			while(a[i] == 0) {
+				isUnique = true;
+				let tmp = Math.floor(Math.random() * 9 + 1) * this.cx / 10 ;
+				for(let j = 0; j < i; j++){
+					if(tmp == a[j]) {
+						isUnique = false;
+						break;
+					}
+				}
+				if(isUnique) a[i] = tmp;
 			}
 		}
-
-		return a;
+			return a.sort(function(k,m){return k - m;});
+  }
+  testPlaces(){
+		console.log(this._randomPlaces());
 	}
-
 }
