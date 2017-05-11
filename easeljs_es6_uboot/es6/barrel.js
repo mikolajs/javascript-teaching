@@ -10,6 +10,7 @@ export class Barrel {
     this.image.visible = false;
     this.dy = 3.2;
     this.isGo = false;
+    console.log(this.image.image.width + " x " + this.image.image.height);
   }
 
   drop(X, Y){
@@ -22,6 +23,12 @@ export class Barrel {
     this.isGo = true;
     //console.log("e Barrel was droped! " + this.nr);
   }
+
+
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getWidth() {return this.image.image.width;}
+  getHeight() {return this.image.image.height;}
 
 
   refresh(time){

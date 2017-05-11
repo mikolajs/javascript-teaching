@@ -6,6 +6,7 @@ export class UBoat {
 	  this.dx = 5;
 	  this.cx = canvSizeX;
 	  this.cy = canvSizeY;
+    this.fires = 0;
 	  //size of uboat in pixels
 	  this.sizeX = 128;
 	  this.sizeY = 80;
@@ -52,6 +53,7 @@ export class UBoat {
     for(let i = 0; i < this.torps.length; i++){
       if(!this.torps[i].isGo){
         this.torps[i].launch(this.x + Math.floor(this.sizeX / 2), this.y);
+        this.fires++;
         return;
       }
     }
@@ -113,6 +115,22 @@ export class UBoat {
 		break;
     }
   }
+
+  destroyed(){
+    this.image.image = new createjs.Bitmap('files/uboatblow.png').image;
+    console.log("destroyed, GAME OVER");
+    document.onkeyup = null;
+    document.onkeydown = null;
+  }
+
+  getNumberOfFires() {
+    return this.fires;
+  }
+
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getWidth() {return this.image.image.width;}
+  getHeight() {return this.image.image.height;}
 
   printXY(){
 	  console.log("XY: (" + this.x + " ; " + this.y + ")");

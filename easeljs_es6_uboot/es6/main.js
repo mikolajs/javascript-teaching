@@ -9,9 +9,14 @@ class Main {
     this.h = this.stage.canvas.height;
     this.back = new createjs.Shape();
     this.time = 0;
+    this.score = 0;
     this.started = true;
     this.uboat = new UBoat(this.w, this.h);
-    this.boat = new Boat(this.w, this.h);
+    this.boat = new Boat(this.w, this.h, this.score);
+    this.text = new createjs.Text("Score: 0", "20px sans", "#ffffff");
+    this.text.x = this.w - 120;
+    this.text.y = this.h - 50;
+    this.text.textBaseline = "alphabetic";
     this.init();
   }
 
@@ -29,18 +34,75 @@ class Main {
     this.stage.addChild(this.uboat.torps[2].image);
     for(let i = 0; i < this.boat.bars.length; i++)
         this.stage.addChild(this.boat.bars[i].image);
-
+    this.stage.addChild(this.text);
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick",
     this.handleTick.bind(this));
     this.stage.update();
   }
 
+  checkColision(x1, y1, x2, y2, x3, y3, x4, y4){
+    //console.log(x1 +", "+  x2 +", "+ y1 +", "+ y2 +", "+ x3 +", "+ x4 +", "+ y3 +", "+ y4);
+      return (((x1 <= x3)&&(x2 > x3)) || (x1 >= x3) && (x1 <= x4)) &&
+      (((y1 <= y3)&&(y2 > y3)) || (y1 >= y3) && (y1 <= y4));
+  }
+
   handleTick(event) {
-    if (!event.paused ) {
+    if(this.gameOver){
+      this.stage.update();
+
+    } else if (!event.paused ) {
+      //wykrywanie trafienia torpedą
+      if(this.boat.isGo){
+        let x3 = this.boat.getX();
+        let y3 = this.boat.getY();
+        let x4 = x3 + this.boat.getWidth();
+        let y4 = y3 + this.boat.getHeight();
+        for(let i = 0; i < this.uboat.torps.length; i++){
+          if(this.uboat.torps[i].isGo){
+            let x1 = this.uboat.torps[i].getX();
+            let y1 = this.uboat.torps[i].getY();
+            let x2 = x1 + this.uboat.torps[i].getWidth();
+            let y2 = y1 + this.uboat.torps[i].getHeight();
+
+            if(this.checkColision(x1, y1, x2, y2, x3, y3, x4, y4)){
+              this.boat.destroyed();
+              this.score += 10;
+            }
+          }
+        }
+      }
+
+    //trafienie ubota
+    let x3 = this.uboat.getX();
+    let y3 = this.uboat.getY();
+    let x4 = x3 + this.uboat.getWidth();
+    let y4 = y3 + this.uboat.getHeight();
+    for(let i = 0; i < this.boat.bars.length; i++){
+      if(this.boat.bars[i].isGo){
+        let x1 = this.boat.bars[i].getX();
+        let y1 = this.boat.bars[i].getY();
+        let x2 = x1 + this.boat.bars[i].getWidth();
+        let y2 = y1 + this.boat.bars[i].getHeight();
+
+        if(this.checkColision(x1, y1, x2, y2, x3, y3, x4, y4)){
+          this.uboat.destroyed();
+          let over = new createjs.Text("Game Over!", "60px sans bold", "#ffffff" );
+          let s = over.getBounds();
+          //console.log(s.width + " - " + s.height);
+          over.x = Math.floor((this.w - s.width) / 2);
+          over.y = Math.floor((this.h - s.height) / 2);
+          this.stage.addChild(over);
+          this.gameOver = true;
+        }
+      }
+    }
+
+   this.text.text = "Score: " + (this.score - this.uboat.getNumberOfFires());
       this.boat.refresh(1);
       this.uboat.refresh(1);
       this.stage.update();
+
     }
   }
 

@@ -15,11 +15,14 @@ export class Boat {
 	  this.imgs[0] = new createjs.Bitmap("files/boatL.png");
 	  this.imgs[1] = new createjs.Bitmap("files/boatR.png");
 	  this.image = new createjs.Bitmap("files/boatL.png");
+		this.imgBlow = new createjs.Bitmap("files/boatblow.png");
 	  this.left = true;
     this.image.x = Math.floor(this.x);
     this.image.y = Math.floor(this.y);
     this.isGo = false;
     this.start = 0;
+		this.blowAnimate = 0;
+		this.isBlow = false;
 	 // this.printXY();
 	  this.bars = [];
 		this.placesArray = [];
@@ -28,6 +31,7 @@ export class Boat {
 	  }
 		this.barrelsPos = 0;
 		console.log("barrels: " + this.bars.length);
+		this.mkStart();
   }
 
   refresh(time) {
@@ -54,8 +58,21 @@ export class Boat {
 					 this.start = 200;
 					 this.isGo = false;
 				 }
-      } else if(this.start <= 0 ) this.mkStart();
-			else { this.start -= time;}
+      } else {
+				if(this.isBlow) {
+					//console.log("blow time " + this.blowAnimate);
+					if(this.blowAnimate > 0) {
+				  	this.blowAnimate -= time;
+					} else {
+						this.isBlow = false;
+						this.image.visible = false;
+					}
+				} else {
+					if(this.start <= 0 ) this.mkStart();
+			  	else { this.start -= time;}
+				}
+
+		  }
 			for(let i = 0; i < this.bars.length; i++)
 			 		this.bars[i].refresh(time);
   }
@@ -70,7 +87,8 @@ export class Boat {
   }
 
   mkStart(){
-		this.dx = 2*Math.random() + 0.5;
+		this.dx = 2*Math.random() + 1;
+		this.image.visible = true;
     if( Math.random() > 0.5) {
       this.left = true;
       this.image.image = this.imgs[0].image;
@@ -93,7 +111,21 @@ export class Boat {
 	 }
 	 //console.log(this.placesArray + " is for left " + this.left);
  }
-   printXY(){
+
+ destroyed(){
+	 this.blowAnimate = 300;
+	 this.isBlow = true;
+	 this.isGo = false;
+	 this.image.image = this.imgBlow.image;
+ }
+
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getWidth() {return this.image.image.width;}
+  getHeight() {return this.image.image.height;}
+
+
+	printXY(){
 	  console.log("XY: (" + this.x + " ; " + this.y + ")");
   }
 /// under work!
