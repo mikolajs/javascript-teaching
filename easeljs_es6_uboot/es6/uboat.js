@@ -26,6 +26,17 @@ export class UBoat {
     this.torps[1] = new Torpedo(2);
     this.torps[2] = new Torpedo(3);
     this.isGo = false;
+    this.dataAnim = {
+       framerate: 20,
+       images: ["files/uboatblowanim.png"],
+       frames: {width:128, height:80, count:2},
+       animations: {
+        blow: [0, 1, "blow", 0.05]
+		   }
+	  };
+		this.spriteSheet = new createjs.SpriteSheet(this.dataAnim);
+		this.sprite = new createjs.Sprite(this.spriteSheet, "blow");
+    this.sprite.visible = false;
 	 // this.printXY();
 	 // this.printCanvasSize();
   }
@@ -117,10 +128,20 @@ export class UBoat {
   }
 
   destroyed(){
-    this.image.image = new createjs.Bitmap('files/uboatblow.png').image;
-    console.log("destroyed, GAME OVER");
+    this.image.visible = false;
+    this.sprite.visible = true;
+    this.playBlowSound();
+    this.sprite.x = this.image.x;
+    this.sprite.y = this.image.y;
+    //console.log("destroyed, GAME OVER");
     document.onkeyup = null;
     document.onkeydown = null;
+  }
+
+  playBlowSound() {
+      var instance = createjs.Sound.play("euboat");
+      //instance.on("complete", this.handleComplete, this);
+      instance.volume = 0.3;
   }
 
   getNumberOfFires() {

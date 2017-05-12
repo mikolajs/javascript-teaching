@@ -88,7 +88,6 @@ class Boat {
 		this.imgs[0] = new createjs.Bitmap("files/boatL.png");
 		this.imgs[1] = new createjs.Bitmap("files/boatR.png");
 		this.image = new createjs.Bitmap("files/boatL.png");
-		this.imgBlow = new createjs.Bitmap("files/boatblow.png");
 		this.left = true;
 		this.image.x = Math.floor(this.x);
 		this.image.y = Math.floor(this.y);
@@ -104,6 +103,17 @@ class Boat {
 		}
 		this.barrelsPos = 0;
 		console.log("barrels: " + this.bars.length);
+		this.dataAnim = {
+			framerate: 20,
+			images: ["files/boatblowanim.png"],
+			frames: { width: 128, height: 45, count: 2 },
+			animations: {
+				blow: [0, 1, "blow", 0.05]
+			}
+		};
+		this.spriteSheet = new createjs.SpriteSheet(this.dataAnim);
+		this.sprite = new createjs.Sprite(this.spriteSheet, "blow");
+		this.sprite.visible = false;
 		this.mkStart();
 	}
 
@@ -160,6 +170,7 @@ class Boat {
 	mkStart() {
 		this.dx = 2 * Math.random() + 1;
 		this.image.visible = true;
+		this.sprite.visible = false;
 		if (Math.random() > 0.5) {
 			this.left = true;
 			this.image.image = this.imgs[0].image;
@@ -188,9 +199,19 @@ class Boat {
 
 	destroyed() {
 		this.blowAnimate = 300;
+		this.playBlowSound();
 		this.isBlow = true;
 		this.isGo = false;
-		this.image.image = this.imgBlow.image;
+		this.image.visible = false;
+		this.sprite.visible = true;
+		this.sprite.x = this.image.x;
+		this.sprite.y = this.image.y;
+	}
+
+	playBlowSound() {
+		var instance = createjs.Sound.play("eboat");
+		//instance.on("complete", this.handleComplete, this);
+		instance.volume = 0.3;
 	}
 
 	getX() {
@@ -267,6 +288,17 @@ class UBoat {
     this.torps[1] = new __WEBPACK_IMPORTED_MODULE_0__torpedo__["a" /* Torpedo */](2);
     this.torps[2] = new __WEBPACK_IMPORTED_MODULE_0__torpedo__["a" /* Torpedo */](3);
     this.isGo = false;
+    this.dataAnim = {
+      framerate: 20,
+      images: ["files/uboatblowanim.png"],
+      frames: { width: 128, height: 80, count: 2 },
+      animations: {
+        blow: [0, 1, "blow", 0.05]
+      }
+    };
+    this.spriteSheet = new createjs.SpriteSheet(this.dataAnim);
+    this.sprite = new createjs.Sprite(this.spriteSheet, "blow");
+    this.sprite.visible = false;
     // this.printXY();
     // this.printCanvasSize();
   }
@@ -357,10 +389,20 @@ class UBoat {
   }
 
   destroyed() {
-    this.image.image = new createjs.Bitmap('files/uboatblow.png').image;
-    console.log("destroyed, GAME OVER");
+    this.image.visible = false;
+    this.sprite.visible = true;
+    this.playBlowSound();
+    this.sprite.x = this.image.x;
+    this.sprite.y = this.image.y;
+    //console.log("destroyed, GAME OVER");
     document.onkeyup = null;
     document.onkeydown = null;
+  }
+
+  playBlowSound() {
+    var instance = createjs.Sound.play("euboat");
+    //instance.on("complete", this.handleComplete, this);
+    instance.volume = 0.3;
   }
 
   getNumberOfFires() {
@@ -418,7 +460,14 @@ class Barrel {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
+    this.playSound();
     //console.log("e Barrel was droped! " + this.nr);
+  }
+
+  playBlowSound() {
+    var instance = createjs.Sound.play("barrel");
+    //instance.on("complete", this.handleComplete, this);
+    instance.volume = 0.3;
   }
 
   getX() {
@@ -473,6 +522,7 @@ class Torpedo {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
+    this.playSound();
     //console.log("Torpedo launched! " + this.nr);
   }
 
@@ -498,6 +548,11 @@ class Torpedo {
         this.isGo = false;
       }
     }
+  }
+  playSound() {
+    var instance = createjs.Sound.play("torpedo");
+    //instance.on("complete", this.handleComplete, this);
+    instance.volume = 0.3;
   }
 
 }
@@ -532,6 +587,12 @@ class Main {
     this.text.y = this.h - 50;
     this.text.textBaseline = "alphabetic";
     this.init();
+    createjs.Sound.alternateExtensions = ["mp3"];
+    createjs.Sound.registerSound("files/explodeboat.mp3", "eboat");
+    createjs.Sound.registerSound("files/explodeuboat.mp3", "euboat");
+    createjs.Sound.registerSound("files/torpedo.mp3", "torpedo");
+    createjs.Sound.registerSound("files/barrel.mp3", "barrel");
+    createjs.Sound.registerSound("files/underwater.mp3", "underwater");
   }
 
   init() {
@@ -542,7 +603,9 @@ class Main {
     // this.stage.addChild(this.back);
     this.stage.addChild(bg);
     this.stage.addChild(this.uboat.image);
+    this.stage.addChild(this.uboat.sprite);
     this.stage.addChild(this.boat.image);
+    this.stage.addChild(this.boat.sprite);
     this.stage.addChild(this.uboat.torps[0].image);
     this.stage.addChild(this.uboat.torps[1].image);
     this.stage.addChild(this.uboat.torps[2].image);

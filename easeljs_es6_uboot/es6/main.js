@@ -18,6 +18,12 @@ class Main {
     this.text.y = this.h - 50;
     this.text.textBaseline = "alphabetic";
     this.init();
+    createjs.Sound.alternateExtensions = ["mp3"];
+    createjs.Sound.registerSound("files/explodeboat.mp3", "eboat");
+    createjs.Sound.registerSound("files/explodeuboat.mp3", "euboat");
+    createjs.Sound.registerSound("files/torpedo.mp3", "torpedo");
+    createjs.Sound.registerSound("files/barrel.mp3", "barrel");
+    createjs.Sound.registerSound("files/underwater.mp3", "underwater");
   }
 
   init() {
@@ -28,7 +34,9 @@ class Main {
     // this.stage.addChild(this.back);
     this.stage.addChild(bg);
     this.stage.addChild(this.uboat.image);
+    this.stage.addChild(this.uboat.sprite);
     this.stage.addChild(this.boat.image);
+    this.stage.addChild(this.boat.sprite);
     this.stage.addChild(this.uboat.torps[0].image);
     this.stage.addChild(this.uboat.torps[1].image);
     this.stage.addChild(this.uboat.torps[2].image);

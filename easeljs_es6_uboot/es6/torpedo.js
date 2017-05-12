@@ -18,6 +18,7 @@ export class Torpedo {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
+    this.playSound();
     //console.log("Torpedo launched! " + this.nr);
   }
 
@@ -35,6 +36,11 @@ export class Torpedo {
         this.isGo = false;
       }
     }
+  }
+  playSound() {
+ 		 var instance = createjs.Sound.play("torpedo");
+ 		 //instance.on("complete", this.handleComplete, this);
+ 		 instance.volume = 0.3;
   }
 
 }

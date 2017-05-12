@@ -15,7 +15,6 @@ export class Boat {
 	  this.imgs[0] = new createjs.Bitmap("files/boatL.png");
 	  this.imgs[1] = new createjs.Bitmap("files/boatR.png");
 	  this.image = new createjs.Bitmap("files/boatL.png");
-		this.imgBlow = new createjs.Bitmap("files/boatblow.png");
 	  this.left = true;
     this.image.x = Math.floor(this.x);
     this.image.y = Math.floor(this.y);
@@ -31,6 +30,17 @@ export class Boat {
 	  }
 		this.barrelsPos = 0;
 		console.log("barrels: " + this.bars.length);
+		this.dataAnim = {
+       framerate: 20,
+       images: ["files/boatblowanim.png"],
+       frames: {width:128, height:45, count:2},
+       animations: {
+        blow: [0, 1, "blow", 0.05]
+		   }
+	  };
+		this.spriteSheet = new createjs.SpriteSheet(this.dataAnim);
+		this.sprite = new createjs.Sprite(this.spriteSheet, "blow");
+		this.sprite.visible = false;
 		this.mkStart();
   }
 
@@ -89,6 +99,7 @@ export class Boat {
   mkStart(){
 		this.dx = 2*Math.random() + 1;
 		this.image.visible = true;
+		this.sprite.visible = false;
     if( Math.random() > 0.5) {
       this.left = true;
       this.image.image = this.imgs[0].image;
@@ -114,9 +125,19 @@ export class Boat {
 
  destroyed(){
 	 this.blowAnimate = 300;
+	 this.playBlowSound();
 	 this.isBlow = true;
 	 this.isGo = false;
-	 this.image.image = this.imgBlow.image;
+	 this.image.visible = false;
+	 this.sprite.visible = true;
+	 this.sprite.x = this.image.x;
+	 this.sprite.y = this.image.y;
+ }
+
+ playBlowSound() {
+		 var instance = createjs.Sound.play("eboat");
+		 //instance.on("complete", this.handleComplete, this);
+		 instance.volume = 0.3;
  }
 
   getX() { return this.x; }

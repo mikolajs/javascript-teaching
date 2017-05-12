@@ -21,9 +21,15 @@ export class Barrel {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
+    this.playSound();
     //console.log("e Barrel was droped! " + this.nr);
   }
 
+  playBlowSound() {
+ 		 var instance = createjs.Sound.play("barrel");
+ 		 //instance.on("complete", this.handleComplete, this);
+ 		 instance.volume = 0.3;
+  }
 
   getX() { return this.x; }
   getY() { return this.y; }
