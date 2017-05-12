@@ -41,12 +41,14 @@ export class UBoat {
 	 // this.printCanvasSize();
   }
   moveLeft(){
+    this.playSound();
 	  if(this.x >=  this.dx) {
 		  this.x -= this.dx;
 		  this.image.x = this.x;
 	  }
   }
   moveRight() {
+    this.playSound();
 	  if(this.x <= this.cx - this.sizeX - this.dx) {
 		  this.x += this.dx;
 		  this.image.x = this.x;
@@ -142,6 +144,11 @@ export class UBoat {
       var instance = createjs.Sound.play("euboat");
       //instance.on("complete", this.handleComplete, this);
       instance.volume = 0.3;
+  }
+
+  playSound(){
+    var instance = createjs.Sound.play("underwater");
+    instance.volume = 0.9;
   }
 
   getNumberOfFires() {

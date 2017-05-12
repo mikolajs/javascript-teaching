@@ -29,7 +29,7 @@ export class Boat {
 		  this.bars[i] = new Barrel(i, this.cy);
 	  }
 		this.barrelsPos = 0;
-		console.log("barrels: " + this.bars.length);
+		//console.log("barrels: " + this.bars.length);
 		this.dataAnim = {
        framerate: 20,
        images: ["files/boatblowanim.png"],
@@ -100,6 +100,7 @@ export class Boat {
 		this.dx = 2*Math.random() + 1;
 		this.image.visible = true;
 		this.sprite.visible = false;
+		this.playSound();
     if( Math.random() > 0.5) {
       this.left = true;
       this.image.image = this.imgs[0].image;
@@ -137,7 +138,12 @@ export class Boat {
  playBlowSound() {
 		 var instance = createjs.Sound.play("eboat");
 		 //instance.on("complete", this.handleComplete, this);
-		 instance.volume = 0.3;
+		 instance.volume = 0.8;
+ }
+
+ playSound(){
+	 var instance = createjs.Sound.play("boat");
+	 instance.volume = 0.1;
  }
 
   getX() { return this.x; }
