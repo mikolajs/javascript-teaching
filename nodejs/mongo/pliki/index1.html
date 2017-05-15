@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Get data</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="files/css/bootstrap.min.css" rel="stylesheet">
+    <link href="carousel.css" rel="stylesheet">
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+
+
+
+<section class="row">
+  <div class="col-lg-1"></div>
+  <div class="boxSchool col-lg-10">
+    <h2 >Ilość kliknięć: <small id="clickCount">?</small></h2>
+    <button onclick="getData()"><span class="glyphicon glyphicon-send"></span> Pobierz</button>
+  </div>
+
+    <div class="col-lg-1"></div>
+</section>
+
+
+
+      <footer style="padding-top: 200px; border: 2px solid #eee;">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
+           <a href="#">Terms</a></p>
+      </footer>
+
+
+    <script src="files/js/jquery.js"></script>
+    <script src="files/js/bootstrap.min.js"></script>
+    <script>
+    function getData(){
+      var xmlhttp = new XMLHttpRequest();
+      var url = "/api";
+
+      xmlhttp.onreadystatechange = function() {
+        console.log("reolad");
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("ready");
+          var licznikObj = JSON.parse(this.responseText);
+          myFunction(licznikObj);
+        } else {console.log("not ready status: " + this.status)};
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    }
+    function myFunction(obj) {
+      document.getElementById("clickCount").innerHTML = obj.licznik;
+    }
+    getData();
+
+    </script>
+
+  </body>
+</html>

@@ -1,5 +1,6 @@
 
 export class Torpedo {
+
   constructor(nr){
     this.nr = nr;
     this.x = 0;
@@ -17,8 +18,14 @@ export class Torpedo {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
-    console.log("Torpedo launched! " + this.nr);
+    this.playSound();
+    //console.log("Torpedo launched! " + this.nr);
   }
+
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getWidth() {return this.image.image.width;}
+  getHeight() {return this.image.image.height;}
 
   refresh(time){
     if(this.isGo){
@@ -29,6 +36,11 @@ export class Torpedo {
         this.isGo = false;
       }
     }
-
   }
+  playSound() {
+ 		 var instance = createjs.Sound.play("torpedo");
+ 		 //instance.on("complete", this.handleComplete, this);
+ 		 instance.volume = 0.3;
+  }
+
 }

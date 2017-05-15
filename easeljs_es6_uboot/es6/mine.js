@@ -1,16 +1,15 @@
 
 
-export class Barrel {
-  constructor(nr, cy){
-    this.nr = nr;
+export class Mine {
+  constructor(cy){
     this.x = 0;
     this.y = 0;
     this.cy = cy;
-    this.image = new createjs.Bitmap("files/barrel.png");
+    this.image = new createjs.Bitmap("files/mine.png");
     this.image.visible = false;
-    this.dy = 3.2;
+    this.dy = 8;
     this.isGo = false;
-    // console.log(this.image.image.width + " x " + this.image.image.height);
+    console.log(this.image.image.width + " x " + this.image.image.height);
   }
 
   drop(X, Y){
@@ -21,14 +20,7 @@ export class Barrel {
     this.image.y = Math.floor(this.y);
     this.image.visible = true;
     this.isGo = true;
-    this.playSound();
     //console.log("e Barrel was droped! " + this.nr);
-  }
-
-  playSound() {
- 		 var instance = createjs.Sound.play("barrel");
- 		 //instance.on("complete", this.handleComplete, this);
- 		 instance.volume = 0.3;
   }
 
   getX() { return this.x; }

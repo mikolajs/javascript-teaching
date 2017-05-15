@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Animated page</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="files/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div style="background-color: red; height: 100%"></div>
+
+<section id="mainSection">
+
+  <img id="titlePicture" src="files/slide1_1600_900.png" />
+
+
+  <div id="chooseSchool">
+    <h1>Zespół Kształcenia Podstawowego i Gimnazjalnego nr 26 w Gdańsku </h1>
+   <div class="row onVideo">
+     <div class="col-lg-3"></div>
+     <div class="col-lg-6">
+       <div class="schoolCard1">
+         <h1>Szkoła Podstawowa nr 70</h1>
+       </div>
+       <div class="schoolCard2">
+       <h1>Gimnazjum nr 46</h1>
+     </div>
+     </div>
+
+     <div class="col-lg-3"></div>
+   </div>
+
+ </div>
+
+</section>
+
+<!--
+<section class="navbar-wrapper">
+  <div class="container">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</section>
+-->
+
+
+  <section class="antract contact">
+
+    <div class="row" style="background-color: #eee;">
+      <div class="col-lg-6">
+        <div class="picture">
+          <img src="files/contact.png" class="imgBig"/>
+        </div>
+      </div>
+      <div class="col-lg-5" styl="text-align:center;" >
+        <h1>Kontakt</h1>
+        <h3 id="nameCont">Zespół Kształcenia Podstawowego i Gimnazjalnego nr 26</h3>
+        <h3 id="patronCont">Szkoła Podstawowa nr 70, Gimnazjum nr 46, Gdańska Szkoła Floretu</h3>
+
+        <h3 id="streetCont">ul VII Dwór 7</h3>
+        <h3 id="cityCont">80-301 Gdańsk</h3>
+
+        <p><img alt="Telefon" src="/images/phone.png" class="contact"> <span id="phoneCont">58 556 00 14</span></p>
+        <p><img alt="Fax" src="/images/print.png" class="contact"><span id="faxCont">-</span></p>
+        <p><img alt="Email" src="/images/email.png" class="contact"><span id="mailCont">sekretariat.zkpig26@poczta.internetdsl.pl </span></p>
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
+
+    <div class="row" style="background-color: #bbb;">
+      <div class="col-lg-6">
+        <div class="picture">
+        <a href="https://www.google.com/maps/d/viewer?mid=1ymzp3QplspMTyTzqrdK_CvLYDvo&hl=pl" target="_blank">
+          <img src="files/mapa_zkpig.png" class="imgBig" ></a>
+      </div>
+      </div>
+      <div class="col-lg-5">
+
+        <h2>Formularz kontaktowy</h2>
+        <form class="form-horizontal" id="contact_form">
+          <div class="form-group"><label for="theme" class="col-md-3">Temat:</label>
+            <div class="col-md-9"> <input id="theme" class="form-control" name="F738931881107X4EB5J" type="text" value=""></div>
+          </div>
+          <div class="form-group"><label for="select" class="col-md-3">Do kogo:</label>
+            <div class="col-md-9"> <select type="text" id="select" class="form-control" name="F738931881108R5LMJ0"><option value="sekretariat">sekretariat</option><option value="administrator">administrator</option><option value="Gda&#x0144;ska Szko&#x0142;a Floretu">Gdańska Szkoła Floretu</option></select></div>
+          </div>
+          <div class="form-group"><label for="mailcontent" class="col-md-3">Treść:</label>
+            <div class="col-md-9">
+              <textarea cols="20" rows="10" class="form-control" id="mailcontent" name="F738931881109UEJ4WL"></textarea></div>
+            </div>
+            <div class="form-group"><label for="mail" class="col-md-3">Twój email:</label>
+              <div class="col-md-9"><input class="form-control" id="mail" name="F738931881110ZCC13K" type="text" value=""></div>
+            </div>
+            <div class="form-group"><div class="col-md-3"></div>
+            <div class="col-md-9"><input class="btn btn-lg btn-success" id="submit" name="F738931981111ULE04H" type="submit" onclick="return isValid();" value="Wy&#x015b;lij!"></div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-lg-1"></div>
+    </div>
+
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
+
+
+
+
+  <script src="script.js"></script>
+  <script>
+
+  </script>
+
+</body>
+</html>
