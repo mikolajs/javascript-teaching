@@ -13,17 +13,17 @@ export class Boat {
 	  this.imgs = [];
 	  this.imgs[0] = new createjs.Bitmap("files/boatL.png");
 	  this.imgs[1] = new createjs.Bitmap("files/boatR.png");
-	  this.image = new createjs.Bitmap("files/boatL.png");
+	  this.image = this.imgs[0];
 	  this.left = true;
-     this.image.x = this.x;
-     this.image.y = this.y;
-     this.isGo = false;
-     this.start = 0;
+    this.image.x = this.x;
+    this.image.y = this.y;
+    this.isGo = false;
+    this.start = 0;
 	 // this.printXY();
-	 this.bars = [];
-	 for(let i = 1; i <= 5; i++){
+	  this.bars = [];
+	  for(let i = 1; i <= 5; i++){
 		 this.bars[i] = new Barrel(i);
-	 }
+	  }
 	 // this.printCanvasSize();
   }
 
