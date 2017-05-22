@@ -5,23 +5,33 @@ var app = express();
 var data = require('./data');
 var bodyParser = require('body-parser');
 
+
 app.use(express.static('pliki'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.get('/', function(req, res){
+  console.log('Path: /  list');
+  data.getAllArticles(res);
+});
+
 app.get('/:id', function(req, res){
-  var artId = req.param('id');
+  var artId = req.params.id;
+  console.log("get Article id: " + artId);
   if(artId) {
-    data.getArticle(res);
+    data.getArticle(res, artId);
   }
   else {
     res.redirect('/pliki/404.html');
   }
 });
 
-app.get('/save/:id', function(req, res){
+app.post('/:id', function(req, res){
+  var artId = req.param('id');
+
+  data.saveArticle(req, artId, body);
  res.send('NOt implemented yet');
 });
 
