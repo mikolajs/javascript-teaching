@@ -1,15 +1,20 @@
 'use strict'
 
+var licznik = 0;
 var express = require('express');
 var app = express();
 var data = require('./data');
 var bodyParser = require('body-parser');
 
-app.use(express.static('static'));
+app.use(express.static('pliki'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.get("/", function(req, res){
+  res.send('<h1>wejść na stronę: <span style="color:red;">' + ++licznik + '</h1>');
+});
 
 app.get('/api/get', function(req, res){
   var act = req.query.t;

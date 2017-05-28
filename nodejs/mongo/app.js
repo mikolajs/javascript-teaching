@@ -13,11 +13,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res){
-  console.log('Path: /  list');
+  console.log('Path: /');
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/all', function(req, res){
+  console.log('Path: /all');
   data.getAllArticles(res);
 });
 
-app.get('/:id', function(req, res){
+app.get('/one/:id', function(req, res){
   var artId = req.params.id;
   console.log("get Article id: " + artId);
   if(artId) {
@@ -28,18 +33,15 @@ app.get('/:id', function(req, res){
   }
 });
 
-app.post('/:id', function(req, res){
-  var artId = req.param('id');
-
+app.post('/add/:id', function(req, res){
+  var artId = req.params.id;
   data.saveArticle(req, artId, body);
- res.send('NOt implemented yet');
 });
 
 
 app.get('/del/:id', function(req, res){
-
- res.send('Not implemented yet');
-
+ var artId = req.params.id;
+ data.delArticle(res, artId);
 });
 
 
