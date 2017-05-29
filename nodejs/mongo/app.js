@@ -35,7 +35,10 @@ app.get('/one/:id', function(req, res){
 
 app.post('/add/:id', function(req, res){
   var artId = req.params.id;
-  data.saveArticle(req, artId, body);
+  var body = req.body.body;
+  var title = req.body.title;
+  console.log("add article id=" + id);
+  data.saveArticle(req, artId, title, body);
 });
 
 

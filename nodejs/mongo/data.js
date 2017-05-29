@@ -37,7 +37,7 @@ exports.getAllArticles = function(res){
     col.find({}).toArray(function(err, items){
       if(err) {
         db.close();
-        res.send("{'Ans': 'NO'}");
+        res.send("[]");
       } else {
         db.close();
         console.log("Items " + items);
@@ -66,7 +66,7 @@ exports.delArticle = function(res, id){
   });
 }
 
-exports.saveArticle = function(res, id, body){
+exports.saveArticle = function(res, id, title, body){
   mongo.connect(conStr, function(err, db){
     if(err) {
       console.log("Connectin error " + e.toString());
