@@ -73,15 +73,23 @@ exports.saveArticle = function(res, id, title, body){
       return;
     }
     var col = db.collection(colArticle);
-    col.updateOne({'_id': ObjectId(id)}, { $set: {'title': title, 'body': body }},
-      function(err, result){
-        if(err == null) {
-          console.log("Inserted no errors. Changed: " + result.result.n);
-          res.send("{'Ans': 'NO'}");
-        } else {
-            res.send("{'Ans': 'OK'}");
-        }
+    if(id.length == 24)
+      col.updateOne({'_id': ObjectId(id)}, { $set: {'title': title, 'body': body }},
+        function(err, result){
+         if(err == null) {
+           console.log("Inserted no errors. Changed: " + result.result.n);
+           res.send("{'Ans': 'NO'}");
+         } else {
+              res.send("updated");
+            }
         db.close();
     });
+    else {
+      col.insertOne({'title': title, 'body': body }, function(err, result){
+        console.log("inserted article: " + title);
+        res.send("added");
+        db.close();
+      });
+    }
   });
 }

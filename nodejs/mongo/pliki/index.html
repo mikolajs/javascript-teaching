@@ -8,6 +8,7 @@
     <script src="/js/jquery.js"></script>
     <style>
  #title { color: green; font-size: 5em;}
+ .editDiv { margin-top: 20px; border-top: 1px dotted #aaa; padding-top: 20px;}
     </style>
 </head>
 <body>
@@ -24,15 +25,18 @@
     <article id="article">
 
     </article>
+    <img src="editBtn.png" onclick="editArticle(this)" name="" id="editBtn"  />
+    <img src="delBtn.png" onclick="delArticle(this)" name="" id="delBtn"  />
   </div>
 </div>
-<div class="row">
+<div class="row editDiv">
 <div class="col-md-2"></div>
 <div class="col-md-8">
   <input id="id" type="text" style="display:none" />
   <label>Tytuł:<input type="text" class="form-control" id="titleEdit" /></label>
   <br /><textarea class="form-control"id="editor"></textarea>
   <br  /> <button class="btn btn-info" onclick="saveArticle()">Zapisz</button>
+  <button class="btn btn-default" style="float:right;" onclick="clearArticle()">Czyść</button>
 </div>
 <div class="col-md-2"></div>
 </div>

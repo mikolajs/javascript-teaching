@@ -5,10 +5,13 @@
      xmlhttp.onreadystatechange = function() {
       //  console.log("reolad");
        if (this.readyState == 4 && this.status == 200) {
-         console.log("ready");
+         //console.log("ready");
          var articles = JSON.parse(this.responseText);
          insertArticles(articles);
-         console.log(this.responseText);
+         //console.log(this.responseText);
+         if(articles.length > 0){
+           getOneArticle(articles[0]._id);
+         }
        } else {
         //  console.log("not ready status: " + this.status)
        };
@@ -23,7 +26,7 @@
        data +=  obj[i].title;
        data += '</li>';
      }
-     console.log(data);
+     //console.log(data);
      document.getElementById("list").innerHTML = data;
    }
    function getOneArticle(id){
@@ -38,9 +41,11 @@
          if(article) {
            document.getElementById('article').innerHTML = article.body;
            document.getElementById('title').innerHTML = article.title;
+           document.getElementById('editBtn').setAttribute("name", article._id);
+           document.getElementById('delBtn').setAttribute("name", article._id);
          } else
            document.getElementById('title').innerHTML = "Brak artykuł";
-         console.log(this.responseText);
+         //console.log(this.responseText);
        } else {
          //console.log("not ready status: " + this.status)
        };
@@ -53,6 +58,7 @@
      console.log("save clicked");
      var xmlhttp = new XMLHttpRequest();
      var id = document.getElementById("id").value;
+     //console.log("id is: " + id);
      if(id.length < 1) id ="0";
      var url = "/add/" + id;
      var body = document.getElementById('editor').value;
@@ -61,8 +67,8 @@
      xmlhttp.onreadystatechange = function() {
        //console.log("reolad");
        if (this.readyState == 4 && this.status == 200) {
-         getList();
-         console.log(this.responseText);
+        setTimeout(function(){getList();},1000);
+        //console.log("saved with success");
        } else {
          //console.log("not ready status: " + this.status)
        };
@@ -71,6 +77,39 @@
      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
      xmlhttp.send(params);
 
+   }
+   function delArticle(elem){
+     var id = elem.getAttribute('name');
+     var xmlhttp = new XMLHttpRequest();
+     var url = "/del/" + id;
+
+     xmlhttp.onreadystatechange = function() {
+       //console.log("reolad");
+       if (this.readyState == 4 && this.status == 200) {
+        setTimeout(function(){getList();},1000);
+
+       } else {
+         //console.log("not ready status: " + this.status)
+       };
+     };
+     xmlhttp.open("GET", url, true);
+     xmlhttp.send();
+
+   }
+
+   function editArticle(elem){
+     var id = elem.getAttribute('name');
+     //console.log('id edit: ' + id);
+     document.getElementById('editor').value =
+      document.getElementById('article').innerHTML;
+    document.getElementById('titleEdit').value =
+     document.getElementById('title').innerHTML;
+     document.getElementById('id').value = id;
+   }
+   function clearArticle(){
+     document.getElementById('editor').value = "";
+     document.getElementById('titleEdit').value = "";
+     document.getElementById('id').value = "0";
    }
 
 getList();

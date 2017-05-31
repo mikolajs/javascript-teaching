@@ -34,11 +34,12 @@ app.get('/one/:id', function(req, res){
 });
 
 app.post('/add/:id', function(req, res){
+  console.log("=== start add article");
   var artId = req.params.id;
   var body = req.body.body;
   var title = req.body.title;
-  console.log("add article id=" + id);
-  data.saveArticle(req, artId, title, body);
+  console.log("add article id=" + artId);
+  data.saveArticle(res, artId, title, body);
 });
 
 
