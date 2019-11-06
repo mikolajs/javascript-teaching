@@ -1,0 +1,29 @@
+{
+  "name": "easeljs-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "http-server"
+  },
+  "dependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "typescript": "^3.7.1",
+    "ts-loader": "^6.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "http-server": "^0.11.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "typescript-cli": "^0.1.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
