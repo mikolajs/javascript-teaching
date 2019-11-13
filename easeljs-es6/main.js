@@ -20,8 +20,9 @@ class Main {
     this.imageBackground.onload = this.handleImageLoad;
 
     createjs.Ticker.addEventListener("tick", this.tick);
-    this.map = new Map(this.X/this.tileSize, Math.round(0.85*this.X/this.tileSize), this.tileSize);
 
+    this.map = new Map(this.X/this.tileSize, Math.round(0.85*this.X/this.tileSize), this.tileSize);
+      console.log(this.map.x + "|" + this.map.y);
 
       this.stage.update();
   }
@@ -34,7 +35,8 @@ class Main {
     //this.stage.addChild(this.backImage);
     // this.background.graphics.drawRect(0,0,1000,1000);
     this.stage.addChild(this.background);
-    this.ship = new Ship(this.stage, this.tileSize, this.X/this.tileSize, this.Y/this.tileSize);
+    this.ship = new Ship(this.stage, this.map);
+    this.ship.setPosition(10, 13);
     this.map.drawHexGrid(this.background);
     this.stage.update();
   }

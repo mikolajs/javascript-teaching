@@ -5,8 +5,10 @@ class Map {
   tileSize;
   map;
   mineBitmap;
+  offset;
 
   constructor(x, y, tileSize) {
+    this.offset = 12;
     this.tileSize = tileSize;
     this.x = x;
     this.y = y;
@@ -25,13 +27,13 @@ class Map {
   drawHexGrid(background){
     background.graphics.beginStroke("#ccc");
     background.graphics.setStrokeStyle(1);
-    var pointX = 25; var pointY = 19;
+    var pointX = 25; var pointY = 12;
     for(var i = 0; i < this.y; i++){
       if(i % 2 == 0) {
-        pointX = 25; pointY = i*(this.tileSize -12) + 12;
+        pointX = 25; pointY = i*(this.tileSize -12) + this.offset;
       } else {
         pointX = this.tileSize;
-        pointY = i*this.tileSize - 12*i + 12;
+        pointY = i*this.tileSize - 12*i + this.offset;
       }
     for(var j = 0; j < this.x; j++){
       background.graphics.moveTo(pointX,pointY);
@@ -58,14 +60,16 @@ class Map {
       background.graphics.lineTo(pointX,pointY);
   }
 
-//// TODO:  implement method!!!
   getCenterOfPoolInPixels(x, y){
-    return new Point(100, 100);
+    if(y % 2 == 0) {
+      return new createjs.Point(25+x*50, 25+y/2*76+this.offset);
+    } else {
+      return new createjs.Point(50+x*50, 63*((y+1)/2) + this.offset);
+    }
   }
-}
 
-class Point {
-  constructor(x, y){
-    this.x = x; this.y = y;
+  showCircle(x, y){
+    let point = this.getCenterOfPoolInPixels(x,y);
+
   }
 }
