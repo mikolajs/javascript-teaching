@@ -1,26 +1,29 @@
 
 class Map {
-  stage;
   x;
   y;
+  X; Y;
   tileSize;
   map;
   mapBackground;
   offset;
+  imgEmpty;
 
-  constructor(stage, x, y, tileSize) {
-    this.stage = stage;
+  constructor(stage, X, Y, tileSize) {
+    this.X = X;
+    this.Y = Y;
     this.offset = 12;
     this.tileSize = tileSize;
-    this.x = x;
-    this.y = y;
+    this.x = Math.floor(this.X/this.tileSize);
+    this.y = Math.floor(Math.round(0.85*this.X/this.tileSize));
     this.map = Array(this.x).fill().map(() => (Array(this.y).fill(false)));
     this.mineBitmap = new createjs.Bitmap("mine.png");
     // this.mineBackground =  new createjs.Shape();
-    this.mapBackground = new createjs.Bitmap("empty.png");
-    this.mapBackground.image.onload = this.handleLoadBackground;
-    this.stage.addChild(this.mapBackground);
-    this.stage.addChild(this.cirlceBackground);
+    this.mapBackground = new createjs.Shape();
+    this.mapBackground.graphics.beginFill("#ccc").drawRect(0,0,X,Y);
+    this.mapBackground.x = 0;
+    this.mapBackground.y = 0;
+    stage.addChild(this.mapBackground);
   }
 
   setMine(x, y) {
@@ -28,7 +31,7 @@ class Map {
     var newMine = this.mineBitmap.clone();
     newMine.x = x*this.tileSize + 0.5*this.tileSize;
     newMine.y = y*this.tileSize + 0.5*this.tileSize;
-    stage.addChild(newMine);
+    this.mapBackground.stage.addChild(newMine);
   }
 
   drawHexGrid(background){
@@ -81,13 +84,10 @@ class Map {
     console.log("draw circle: " + point.x + " " + point.y );
     let g = this.mapBackground.graphics;
     g.setStrokeStyle(1);
-    g.beginStroke("#000000");
+    g.beginStroke("#ea0000");
     g.beginFill("red");
-    g.drawCircle(point.x,point.y,30);
-  }
-
-  handleImageLoad = (evt) => {
-    console.log("load Image empty.png");
-    this.mapBackground.graphics.beginBitmapFill(event.target, 'repeat').drawRect(0, 0, this.X, this.Y);
+    g.drawCircle(point.x,point.y, 30);
+    this.setMine(5,5);
+    this.mapBackground.stage.update();
   }
 }
