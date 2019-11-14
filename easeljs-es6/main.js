@@ -21,8 +21,13 @@ class Main {
 
     createjs.Ticker.addEventListener("tick", this.tick);
 
-    this.map = new Map(this.X/this.tileSize, Math.round(0.85*this.X/this.tileSize), this.tileSize);
+    this.map = new Map(this.stage, this.X/this.tileSize, Math.round(0.85*this.X/this.tileSize), this.tileSize);
       console.log(this.map.x + "|" + this.map.y);
+      // this.stage.addEventListener("")
+      this.stage.on("stagemouseup", (evt) => {
+        console.log("the canvas was clicked at "+evt.stageX+","+evt.stageY);
+        this.map.drawCircle(5,5);
+      });
 
       this.stage.update();
   }
@@ -36,7 +41,7 @@ class Main {
     // this.background.graphics.drawRect(0,0,1000,1000);
     this.stage.addChild(this.background);
     this.ship = new Ship(this.stage, this.map);
-    this.ship.setPosition(10, 13);
+    this.ship.setPosition(15, 19);
     this.map.drawHexGrid(this.background);
     this.stage.update();
   }
@@ -53,7 +58,7 @@ class Main {
  }
 
 }
-
+var main;
 function init() {
-  var main = new Main();
+  main = new Main();
 }
