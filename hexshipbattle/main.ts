@@ -10,12 +10,12 @@ class Main {
   X: number;
   Y: number;
   imageBackground: HTMLImageElement;
-  map: Map;
-  tileSize: number;
+  map: HexMap;
+  mapUnitSize: number;
   constructor() {
     this.X = 1200;
     this.Y = 800;
-    this.tileSize = 50;
+    this.mapUnitSize = 5;
     this.stage = new createjs.Stage("gameCanvas");
     this.background = new createjs.Shape();
     this.imageBackground = new Image();
@@ -24,12 +24,12 @@ class Main {
 
     createjs.Ticker.addEventListener("tick", this.tick);
 
-    this.map = new Map(this.stage, this.X, this.Y, this.tileSize);
-      console.log(this.map.x + "|" + this.map.y);
+    this.map = new HexMap(this.stage, this.X, this.Y, this.mapUnitSize);
+      //console.log(this.map.x + "|" + this.map.y);
       // this.stage.addEventListener("")
-      this.stage.on("stagemouseup", (evt: Event) => {
+      this.stage.on("stagemouseup", (evt: createjs.MouseEvent) => {
         console.log("the canvas was clicked at "+evt.stageX+","+evt.stageY);
-        this.map.drawCircle(5,5);
+        this.map.setMine(evt.stageX,evt.stageY);
       });
 
       this.stage.update();
@@ -60,7 +60,7 @@ class Main {
  }
 
 }
-var main;
+var main:Main;
 function init() {
   main = new Main();
 }

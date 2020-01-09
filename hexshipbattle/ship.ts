@@ -4,11 +4,11 @@
 class Ship {
   x: number;
   y: number;
-  map: Map;
+  map: HexMap;
   sizeX: number; sizeY: number;
   shipBitmap: createjs.Bitmap;
 
-  constructor(stage: createjs.Stage, map: Map){
+  constructor(stage: createjs.Stage, map: HexMap){
       this.map = map;
       this.shipBitmap = new createjs.Bitmap("ship.png");
       this.shipBitmap.image.onload = this.handleImage;
