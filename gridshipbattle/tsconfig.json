@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "hexShipsBattle",
+        "target": "es6",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true
+    },
+    "files": [
+        "main.ts",
+        "ship.ts",
+        "map.ts"
+    ]
+}
