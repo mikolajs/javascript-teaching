@@ -13,8 +13,8 @@ class Main {
   map: GridMap;
   mapUnitSize: number;
   constructor() {
-    this.X = 1200;
-    this.Y = 800;
+    this.X = 1250;
+    this.Y = 750;
     this.mapUnitSize = 50;
     this.stage = new createjs.Stage("gameCanvas");
     this.background = new createjs.Shape();
@@ -24,7 +24,6 @@ class Main {
 
     createjs.Ticker.addEventListener("tick", this.tick);
 
-    this.map = new GridMap(this.stage, this.X, this.Y, this.mapUnitSize);
       //console.log(this.map.x + "|" + this.map.y);
       // this.stage.addEventListener("")
       this.stage.on("stagemouseup", (evt: createjs.MouseEvent) => {
@@ -44,7 +43,8 @@ class Main {
     // this.background.graphics.drawRect(0,0,1000,1000);
     this.stage.addChild(this.background);
     this.ship = new Ship(this.stage, this.map);
-    this.map.drawHexGrid(this.background);
+    this.map = new GridMap(this.stage, this.X, this.Y, this.mapUnitSize, this.ship);
+    this.map.drawGrid(this.background);
     this.stage.update();
   }
   handleImageLoad  = (event: Event) => {

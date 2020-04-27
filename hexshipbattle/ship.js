@@ -20,5 +20,8 @@ class Ship {
         this.shipBitmap.x = point.x - this.sizeX / 2;
         this.shipBitmap.y = point.y - this.sizeY / 2;
     }
+    getPosition() {
+        return new createjs.Point(this.x, this.y);
+    }
 }
 //# sourceMappingURL=ship.js.map

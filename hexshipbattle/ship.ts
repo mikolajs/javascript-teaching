@@ -35,4 +35,8 @@ class Ship {
     this.sizeY = this.shipBitmap.image.height*this.shipBitmap.scaleY;
     this.setPosition(Math.floor(Math.random()*this.map.x), Math.floor(Math.random()*this.map.y));
   }
+
+  getPosition() {
+    return new createjs.Point(this.x, this.y);
+  }
 }
