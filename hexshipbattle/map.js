@@ -1,10 +1,9 @@
 class HexMap {
-    constructor(stage, X, Y, unitSize, ship) {
+    constructor(stage, X, Y, unitSize) {
         this.X = X;
         this.Y = Y;
         this.offset = 12;
         this.unitSize = unitSize;
-        this.ship = ship;
         this.x = Math.floor(this.X / (this.unitSize * 10));
         this.y = this.x;
         this.map = Array(this.x).fill(Array(this.y).fill(false));
@@ -101,29 +100,50 @@ class HexMap {
         this.mapBackground.stage.update();
     }
     checkDeathPools() {
-        let startP = this.findFirstFreePool();
-        let checked = new Array();
         let toCheck = new Array();
-        this.addFreeNeighbourPools(startP, checked, toCheck);
+        let startP = this.findFirstFreePool();
+        toCheck.push(startP);
+        let checked = Array(this.x).fill(Array(this.y).fill(false));
+        for (let i = 0; i < this.x; i++)
+            for (let j = 0; j < this.y; j++)
+                if (this.map[i][j])
+                    checked[i][j] = true;
+        let freePoolsArea = new Array();
+        while (toCheck.length != 0) {
+            let p = toCheck.pop();
+            freePoolsArea.push(p);
+            this.addFreeNeighbourPools(p, checked, toCheck);
+        }
     }
     findFirstFreePool() {
         return new createjs.Point();
     }
-    addFreeNeighbourPools(point, checked, toCheck) {
-        if (point.x < this.x) {
-            let neighbourPoint = new createjs.Point(point.x + 1, point.y);
-            if (this.checkIfAddToCheck(neighbourPoint, checked, toCheck))
+    addFreeNeighbourPools(p, checked, toCheck) {
+        let neighbourPoint;
+        if (p.x > 0)
+            neighbourPoint = new createjs.Point(p.x - 1, p.y);
+        else
+            neighbourPoint = new createjs.Point(this.x - 1, p.y);
+        if (p.x < this.x - 1)
+            neighbourPoint = new createjs.Point(p.x + 1, p.y);
+        else
+            neighbourPoint = new createjs.Point(this.x - 1, p.y);
+        if (p.x < this.x - 1)
+            neighbourPoint = new createjs.Point(p.x + 1, p.y);
+        else
+            neighbourPoint = new createjs.Point(this.x - 1, p.y);
+        if (p.x < this.x) {
+            let neighbourPoint = new createjs.Point(p.x, p.y);
+            if (!checked[neighbourPoint.x][neighbourPoint.y]) {
                 toCheck.push(neighbourPoint);
+                checked[neighbourPoint.x][neighbourPoint.y];
+            }
         }
-    }
-    checkIfAddToCheck(point, checked, toCheck) {
-        for (let i in checked) {
-            if (checked[i].x == point.x && checked[i].y == point.y)
-                return true;
-        }
-        return false;
-        for (let i in toCheck) {
-        }
+        for (let a = -1; a < 2; a++)
+            for (let b = -1; b < 2; b++)
+                for (let c = -1; c < 2; c++)
+                    if (a != b && b != c && a != c)
+                        Lib.fromCubeToOddR(a, c);
     }
 }
 //# sourceMappingURL=map.js.map

@@ -11,6 +11,8 @@
     "files": [
         "main.ts",
         "ship.ts",
-        "map.ts"
+        "map.ts",
+        'lib.ts',
+        "test.ts"
     ]
 }
