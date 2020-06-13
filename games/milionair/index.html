@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Milionerzy</title>
+  <meta charset="utf-8" />
+  <script type="text/javascript" src="game.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <style>
+  @font-face {
+  font-family: 'handfont';
+  src:  url('itim.ttf')  format('truetype')
+}
+    body {
+      background-image: url('images/bigbackground.png');
+      background-size: cover;
+      font-family: 'handfont';
+      font-size: 1.1em;
+    }
+    .question {min-width: 100%; min-height: 250px;
+    background-image: url("images/man_on_chair2.png");
+    background-repeat: no-repeat; padding: 20px 20px 1px 45px; color: white;
+    vertical-align: middle;
+    text-align: center;}
+    .answers { position: relative; border-spacing: 5px;}
+    .answer-checked, .answer-not-checked {
+      color: white; margin-bottom: 4px;
+    }
+    .answer-not-checked {background-color: #237;}
+    .answer-checked {background-color: #ffff21;}
+    .checker {font-size: 1.2em;}
+    .gamestate {color: #fe5; font-size: 1.3em; background-color: inherit;
+    width: 200px; font-weight: 600;}
+    .gamestate li {display: block;}
+    .winAmount {float: right;}
+    #OK {width: 100%; margin-top: 20px; font-size: 1.4em;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="row">
+          <div class="question">
+            W3Schools is optimized for learning, testing, and training.
+            Examples might be simplified to improve reading and basic understanding.
+            Tutorials, references, and examples are constantly reviewed to avoid errors,
+            but we cannot warrant full correctness of all content.
+            While using this site, you agree to have read and accepted our terms of use,
+            cookie and privacy policy.
+            Copyright 1999-2020 by Refsnes Data. All Rights Reserved.
+          </div>
+        </div>
+       <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-group answers">
+              <li class="list-group-item answer-not-checked">
+                <span class="checker">&#10008; </span><span>Dzień dobry, mam część prac, ale nie uda mi się dokończyć do jutra. Jutro mam pogrzeb w bliskiej rodzinie. Postaram się odesłać jak najprędzej.
+                  Czy jednak byłaby możliwość skorzystania z konsultacji?</span></li>
+              <li class="list-group-item answer-not-checked">
+                <span class="checker">&#10008; </span><span>Odpowiedź B</span></li>
+              <li class="list-group-item answer-checked">
+                <span class="checker">&#10004; </span>  <span>Odpowiedź B</span></li>
+              <li class="list-group-item answer-checked">
+                  <span class="checker">&#10004; </span><span>Odpowiedź B</span></li>
+              <li class="list-group-item answer-not-checked">
+                  <span class="checker">&#10008; </span><span>Odpowiedź B</span></li>
+            </ul>
+          </div>
+       </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="row">
+            <img src="images/fifty.png" />
+            <img src="images/public.png" />
+            <img src="images/phone.png" />
+            <img src="images/exit.png" />
+          </div>
+          <div class="row">
+            <ul class="list-group gamestate">
+              <li id="win_12"><span class="winNmb">12:</span><span class="winAmount">1 000 000</span></li>
+              <li id="win_11"><span class="winNmb">11:</span><span class="winAmount">500 000</span></li>
+              <li id="win_10"><span class="winNmb">10:</span><span class="winAmount">250 000</span></li>
+              <li id="win_9"><span class="winNmb">9:</span><span class="winAmount">125 000</span></li>
+              <li id="win_8"><span class="winNmb">8:</span><span class="winAmount">75 000</span></li>
+              <li id="win_7"><span class="winNmb">7:</span><span class="winAmount">40 000</span></li>
+              <li id="win_6"><span class="winNmb">6:</span><span class="winAmount">20 000</span></li>
+              <li id="win_5"><span class="winNmb">5:</span><span class="winAmount">10 000</span></li>
+              <li id="win_4"><span class="winNmb">4:</span><span class="winAmount">5 000</span></li>
+              <li id="win_3"><span class="winNmb">3:</span><span class="winAmount">2 000</span></li>
+              <li id="win_2"><span class="winNmb">2:</span><span class="winAmount">1 000</span></li>
+              <li id="win_1"><span class="winNmb">1:</span><span class="winAmount">500</span></li>
+            </ul>
+          </div>
+          <div>
+                <button class="btn btn-danger" id="OK"> Zatwierdź </button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

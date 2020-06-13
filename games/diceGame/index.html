@@ -14,6 +14,10 @@
    }
   </script>
   <style>
+    html {margin: auto;}
+    td {
+      min-width: 100px;
+    }
     td, #gameInfo {
       text-align: center;
     }
@@ -58,62 +62,49 @@
     <p id="ilosc"></p>
   </div>
   <div>
-    <table>
-      <tr><th>Wybór</th><th>Punkty</th></tr>
+    <table align="center">
+      <tr><th>Wybór</th><th>Punkty</th><th>Wybór</th><th>Punkty</th></tr>
       <tr>
         <td><span id="btn1" class="btn btn-green" onclick="g.checkEyes(1);">Jedynki</span></td>
-        <td id="e1"></td>
+        <td id="e1">
+          <td><span id="btnx3" class="btn btn-green" onclick="g.checkExtra('3');">Trójka</span></td>
+          <td id="x3"></td>
+        </td>
       </tr>
       <tr>
         <td><span id="btn2" class="btn btn-green" onclick="g.checkEyes(2);">Dwójki</span></td>
         <td id="e2"></td>
-      </tr>
-      <tr>
-        <td><span id="btn3" class="btn btn-green" onclick="g.checkEyes(3);">Trójki</span></td>
-        <td id="e3"></td>
-      </tr>
-      <tr>
-        <td><span id="btn4" class="btn btn-green" onclick="g.checkEyes(4);">Czwórki</span></td>
-        <td id="e4"></td>
-      </tr>
-      <tr>
-        <td><span id="btn5" class="btn btn-green" onclick="g.checkEyes(5);">Piątki</span></td>
-        <td id="e5"></td>
-      </tr>
-      <tr>
-        <td><span id="btn6" class="btn btn-green" onclick="g.checkEyes(6);">Szóstki</span></td>
-        <td id="e6"></td>
-      </tr>
-      <tr>
-        <td><span id="btnx3" class="btn btn-green" onclick="g.checkExtra('3');">Trójka</span></td>
-        <td id="x3"></td>
-      </tr>
-      <tr>
         <td><span id="btnx4" class="btn btn-green" onclick="g.checkExtra('4');">Czwórka</span></td>
         <td id="x4"></td>
       </tr>
       <tr>
+        <td><span id="btn3" class="btn btn-green" onclick="g.checkEyes(3);">Trójki</span></td>
+        <td id="e3"></td>
         <td><span id="btnxf" class="btn btn-green" onclick="g.checkExtra('f');">Full</span></td>
         <td id="xf"></td>
       </tr>
       <tr>
+        <td><span id="btn4" class="btn btn-green" onclick="g.checkEyes(4);">Czwórki</span></td>
+        <td id="e4"></td>
         <td><span id="btnxs" class="btn btn-green" onclick="g.checkExtra('s');">Mały Strit</span></td>
         <td id="xs"></td>
       </tr>
       <tr>
+        <td><span id="btn5" class="btn btn-green" onclick="g.checkEyes(5);">Piątki</span></td>
+        <td id="e5"></td>
         <td><span id="btnxS" class="btn btn-green" onclick="g.checkExtra('S');">Duży Strit</span></td>
         <td id="xS"></td>
       </tr>
       <tr>
+        <td><span id="btn6" class="btn btn-green" onclick="g.checkEyes(6);">Szóstki</span></td>
+        <td id="e6"></td>
         <td><span id="btnx5" class="btn btn-green" onclick="g.checkExtra('5');">Generał</span></td>
         <td id="x5"></td>
       </tr>
       <tr>
         <td><span id="btnx0" class="btn btn-green" onclick="g.checkExtra('0');">Szansa</span></td>
         <td id="x0"></td>
-      </tr>
-      <tr>
-        <td><span >Suma:</span></td>
+        <td><span class="btn btn-gray">Suma:</span></td>
         <td id="s1"></td>
       </tr>
     </table>

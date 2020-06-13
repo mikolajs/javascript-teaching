@@ -86,7 +86,7 @@ addPhase(){
       if(this.gameOver) {
         document.getElementById("gameInfo").innerHTML = "koniec gry";
         document.getElementById("reka").src="rzut-pause.png";
-      } else
+      } else {
   switch (this.etap) {
     case 0:
       document.getElementById("gameInfo").innerHTML = "pierwszy rzut";
@@ -100,6 +100,7 @@ addPhase(){
     default:
       document.getElementById("gameInfo").innerHTML = "wybierz co punktować";
   }
+}
 }
 
 checkEyes(i){
