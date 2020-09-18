@@ -1,6 +1,7 @@
 {
+   "compileOnSave": true,
     "compilerOptions": {
-        "module": "hexShipsBattle",
+        "module": "commonjs",
         "target": "es6",
         "noImplicitAny": true,
         "removeComments": true,
@@ -10,6 +11,8 @@
     "files": [
         "main.ts",
         "ship.ts",
-        "map.ts"
+        "map.ts",
+        'lib.ts',
+        "test.ts"
     ]
 }

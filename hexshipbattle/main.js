@@ -3,13 +3,14 @@ class Main {
         this.handleImageLoad = (event) => {
             console.log("Read Bitmap");
             this.mkBackground();
+            this.map.drawHexGrid(this.background);
         };
         this.tick = (even) => {
             this.stage.update(event);
         };
         this.X = 1200;
-        this.Y = 800;
-        this.mapUnitSize = 5;
+        this.Y = 600 + this.X / 120;
+        this.mapUnitSize = 10;
         this.stage = new createjs.Stage("gameCanvas");
         this.background = new createjs.Shape();
         this.imageBackground = new Image();

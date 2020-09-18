@@ -1,25 +1,32 @@
 /// <reference path="/usr/local/lib/node_modules/@types/easeljs/index.d.ts" />
 
 class GridMap {
+<<<<<<< HEAD
   X: number;
   Y: number;
   rows: number; cols: number;
+=======
+  row: number;
+  col : number;
+  X: number; Y: number;
+>>>>>>> 79c52e0b8a51079ba673f8f14117295eac38613a
   unitSize: number;
+  freePools: number;
   map: Array<Array<boolean>>;
   mapBackground: createjs.Shape;
-  offset: number;
   imgEmpty: HTMLImageElement;
-  mineBitmap: createjs.Bitmap
+  mineBitmap: createjs.Bitmap;
+  ship: Ship;
 
-  constructor(stage: createjs.Stage, X: number, Y: number, unitSize: number) {
+  constructor(stage: createjs.Stage, X: number, Y: number, unitSize: number, ship: Ship) {
     this.X = X;
     this.Y = Y;
-    this.offset = 12;
     this.unitSize = unitSize;
     this.rows = Math.floor(this.X/(this.unitSize));
     this.cols = Math.floor(Math.round(this.Y/(this.unitSize)));
     this.map = Array<Array<boolean>>(this.rows).fill(Array(this.cols).fill(false));
     this.mineBitmap = new createjs.Bitmap("mine.png");
+    console.log("Rows: " + this.row + " Cols: " + this.col);
     // this.mineBackground =  new createjs.Shape();
     this.mapBackground = new createjs.Shape();
     this.mapBackground.graphics.beginFill("#ccc").drawRect(0,0,X,Y);
@@ -27,8 +34,9 @@ class GridMap {
     this.mapBackground.y = 0;
     stage.addChild(this.mapBackground);
   }
-/// @param x, y - pixels clicked on canvas
-  setMine(x: number, y: number) {
+
+  setMine(x: number, y: number):boolean {
+    // console.log("Clicked at x: " + x + " y: " + y);
     let pointPool = this.getPoolClicked(x, y);
     this.map[pointPool.x][pointPool.y] = true;
     let point = this.getCenterOfPoolInPixels(x,y);
@@ -52,6 +60,9 @@ class GridMap {
       this.drawOneGrid(background, pointX, pointY);
       pointX += this.unitSize;
       // console.log("draw at ("+pointX + ", " + pointY +")")
+      pointX += this.unitSize;
+    }
+    pointY += this.unitSize;
     }
     pointY += this.unitSize;
   }
@@ -67,21 +78,16 @@ class GridMap {
       background.graphics.lineTo(pointX,pointY);
       pointX -= xx; pointY += yy;
       background.graphics.lineTo(pointX,pointY);
-      pointX -=xx; pointY -= yy;
+      pointY += this.unitSize;
       background.graphics.lineTo(pointX,pointY);
-      pointY -= xx;
+      pointX -= this.unitSize;
       background.graphics.lineTo(pointX,pointY);
-      pointX += xx; pointY -= yy;
+      pointY -= this.unitSize;
       background.graphics.lineTo(pointX,pointY);
   }
 
-
-  getCenterOfPoolInPixels(x: number, y: number){
-    if(y % 2 == 0) {
-      return new createjs.Point(25+x*50, 25+y/2*76 + this.offset);
-    } else {
-      return new createjs.Point(50+x*50, 64+ 76*((y-1)/2) + this.offset);
-    }
+  getCenterOfPoolInPixels(col: number, row: number){
+      return new createjs.Point((col+0.5)*this.unitSize, (row+0.5)*this.unitSize);
   }
 
   drawCircle(row: number, col: number){
@@ -95,4 +101,19 @@ class GridMap {
     g.drawCircle(point.x,point.y, 30);
     this.mapBackground.stage.update();
   }
+
+  checkMinesCutting(){
+    let pools = Array<Array<boolean>>(this.row).fill(Array(this.col).fill(false));
+    let toCheck = new Array<createjs.Point>();
+    let rootPoint = new createjs.Point(this.ship.x, this.ship.y);
+    pools[rootPoint.x][rootPoint.y] == true;
+
+
+  }
+
+  checkPoint(col: number, row: number, pools: Array<Array<boolean>>, tocheck: Array<createjs.Point>){
+
+  }
+
+
 }

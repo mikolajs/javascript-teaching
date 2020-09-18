@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Gra memory</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="memory.js"></script>
+ <style>
+   .panel img {
+     box-shadow: 10px 5px 5px #aaa;
+     border-radius: 30px;
+     margin: 5px; padding: 0px;
+     width: 200px; height: 194px;
+   }
+   * { margin: auto; text-align: center; vertical-align: middle;}
+   #powitanie {border: 1px solid #ddd; padding: 50px; margin: 50px auto; width: 400px;
+      background-color: #99f; color: white; font-size: 1.5em;}
+      input {border: 1px solid #00f;height: 30px;}
+      button {width: 100px; height: 30px; background-color: #d9d211;}
+ </style>
+</head>
+<body>
+  <section id="powitanie">
+    <label>Podaj imię:</label><input type="text" id="imie" /><br />
+    <label><input type="radio" name="sizeGame" value="4,2" /> 4x2</label><br />
+    <label><input type="radio" name="sizeGame" value="6,3" checked/> 6x3</label><br />
+    <label><input type="radio" name="sizeGame" value="7,4" /> 7x4</label><br />
+    <button onclick="start();">OK</button>
+  </section>
+  <section id="gra">
+  </section>
+  <section id="koniec">
+    <h1>Brawo <span id="zwyciesca"></span>
+      wykonałeś zadanie w <span id="iloscRuchow">0</span> ruchach</h1>
+    <img src="puchar.jpg" />
+    <h2>Odśwież stronę, żeby zagrać ponownie</h2>
+    <button onclick="reload();">Ośwież</button>
+  </section>
+</body>
+</html>
