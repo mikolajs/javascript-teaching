@@ -1,9 +1,15 @@
 /// <reference path="/usr/local/lib/node_modules/@types/easeljs/index.d.ts" />
 
 class GridMap {
+<<<<<<< HEAD
+  X: number;
+  Y: number;
+  rows: number; cols: number;
+=======
   row: number;
   col : number;
   X: number; Y: number;
+>>>>>>> 79c52e0b8a51079ba673f8f14117295eac38613a
   unitSize: number;
   freePools: number;
   map: Array<Array<boolean>>;
@@ -16,11 +22,9 @@ class GridMap {
     this.X = X;
     this.Y = Y;
     this.unitSize = unitSize;
-    this.ship = ship;
-    this.col = Math.floor(this.X/(this.unitSize));
-    this.row = Math.floor(Math.round(this.Y/(this.unitSize)));
-    this.map = Array<Array<boolean>>(this.row).fill(Array(this.col).fill(false));
-    this.freePools = this.col*this.row;
+    this.rows = Math.floor(this.X/(this.unitSize));
+    this.cols = Math.floor(Math.round(this.Y/(this.unitSize)));
+    this.map = Array<Array<boolean>>(this.rows).fill(Array(this.cols).fill(false));
     this.mineBitmap = new createjs.Bitmap("mine.png");
     console.log("Rows: " + this.row + " Cols: " + this.col);
     // this.mineBackground =  new createjs.Shape();
@@ -34,50 +38,45 @@ class GridMap {
   setMine(x: number, y: number):boolean {
     // console.log("Clicked at x: " + x + " y: " + y);
     let pointPool = this.getPoolClicked(x, y);
-    if(this.map[pointPool.y][pointPool.x]) return false;
-    this.map[pointPool.y][pointPool.x] = true;
-    this.freePools--;
-    // console.log("clicked: " + pointPool.x + "," + pointPool.y);
-    this.placeMine(pointPool.x, pointPool.y);
-    this.checkMinesCutting();
-    return true;
-  }
-
-  placeMine(col: number, row: number){
-    let point = this.getCenterOfPoolInPixels(col, row);
-    // console.log("The center point y: " + point.x + " y: " + point.y);
-    let newMine = this.mineBitmap.clone();
-    newMine.x = point.x - this.mineBitmap.image.width/2;
-    newMine.y = point.y - this.mineBitmap.image.height/2;
+    this.map[pointPool.x][pointPool.y] = true;
+    let point = this.getCenterOfPoolInPixels(x,y);
+    var newMine = this.mineBitmap.clone();
+    newMine.x = point.x - 0.5*this.mineBitmap.x;
+    newMine.y = point.y + 0.5*this.mineBitmap.y;
     this.mapBackground.stage.addChild(newMine);
   }
 
-  //// TODO: implement properly
   getPoolClicked(x: number, y: number):createjs.Point {
-      return new createjs.Point(
-        Math.floor(x/this.unitSize), Math.floor(y/this.unitSize)
-      );
+      return new createjs.Point(Math.floor(x/this.unitSize), Math.floor(y/this.unitSize));
   }
 
   drawGrid(background: createjs.Shape){
     background.graphics.beginStroke("#ccf");
     background.graphics.setStrokeStyle(1);
     let pointX = 0; let pointY = 0;
-    for(let i = 0; i < this.row; i++){
-      pointX = 0;
-    for(var j = 0; j < this.col; j++){
+    for(let i = 0; i < this.rows; i++){
+    for(let j = 0; j < this.cols; j++){
       background.graphics.moveTo(pointX,pointY);
       this.drawOneGrid(background, pointX, pointY);
+      pointX += this.unitSize;
       // console.log("draw at ("+pointX + ", " + pointY +")")
       pointX += this.unitSize;
     }
     pointY += this.unitSize;
     }
+    pointY += this.unitSize;
+  }
   }
 
   drawOneGrid(background: createjs.Shape, startX: number, startY: number){
-      var pointX = startX; var pointY = startY;
-      pointX += this.unitSize;
+    const xx = 25;
+    const yy = 5;
+      let pointX = startX; let pointY = startY;
+      pointX +=xx; pointY += yy;
+      background.graphics.lineTo(pointX,pointY);
+      pointY += xx;
+      background.graphics.lineTo(pointX,pointY);
+      pointX -= xx; pointY += yy;
       background.graphics.lineTo(pointX,pointY);
       pointY += this.unitSize;
       background.graphics.lineTo(pointX,pointY);
