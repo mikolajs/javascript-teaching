@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8" />
+
+<body>
+
+<div id="mydiv"></div>
+
+<script>
+class Base {
+ constructor(){
+ this.a = 34;
+ }
+}
+class Parent extends Base {
+  b = 33;
+    constructor(){
+      super();
+    }
+    print(){
+     console.log(this.a + " + " + this.b + " = " + (this.b+this.a));
+     }
+}
+let p = new Parent();
+p.print();
+</script>
+
+</body>
+</html>

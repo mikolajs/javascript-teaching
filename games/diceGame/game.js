@@ -168,6 +168,7 @@ checkExtra(c){
     this.player.options[i] = false;
     document.getElementById("x" + c).innerHTML = p;
     document.getElementById("btnx" + c).className = "btn btn-gray";
+    document.getElementById("s1").innerHTML = this.player.points;
     if(this.player.moves == 0) this.gameOver = true;
     this.czysc();
     this.etap = 0;
