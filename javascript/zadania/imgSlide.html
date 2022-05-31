@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport">
+    <meta charset="utf-8" >
+    <style>
+       body, #imgContener {width: 100%; height: 100%; background-color: #111;
+        margin: 0 auto; overflow: hidden; position: relative;
+      }
+      #img { position: absolute;}
+    </style>
+
+
+</head>
+<body >
+
+<div class="imageContener" >
+    <img src="" id="img" />
+</div>
+<script type="text/javascript">
+  var interval = 5000;
+  var reloadTime = 40000; //3600000;
+</script>
+
+<img style="display:none;" id="hiddenImg" src="" />
+<script>
+   var nr = 0;
+   var interval = 5000;
+   var reload = 0;
+   var imgList = ["http://xxlo.pl/assets/Uploads/1.jpg",
+   "http://a2.files.fashionista.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTI4NjQ2ODIyMDIwMjg5ODEw.jpg",
+   "https://upload.wikimedia.org/wikipedia/commons/b/bf/Blue_Tiger_Im_IMG_9450.jpg",
+   "https://i.theones2watch.com/wp-content/latest/gosee-ny-rachelnutt@img-irachernova4.jpg"];
+   var img = document.getElementById('img');
+   var imgPos = new Array(imgList.length);
+
+   
+    calculateSize();
+    getNext();
+    
+
+   setInterval(getNext, interval);
+
+    function getNext(){     
+        if(nr >= imgList.length)  nr = 0;
+        img.style.top = imgPos[nr].t;
+        img.style.left = imgPos[nr].l;
+        img.style.width = imgPos[nr].w;
+        img.style.height = imgPos[nr].h;
+        img.setAttribute('src', imgList[nr]);      
+        nr++;
+   }
+
+   function calculateSize(){
+      for(var i =0; i < imgList.length; i++){
+         imgPos[i] = _resize(i);
+      }
+   }
+
+    function _resize(num) {
+       var errorDelta = 0.2;
+    	 var h = parseFloat(screen.height);
+    	 var w = parseFloat(screen.width);
+
+    	 var nImg = new Image();
+    	 nImg.src = imgList[num];
+
+       var propImg = nImg.naturalWidth / nImg.naturalHeight;
+       var propScreen = w / h;
+       var delta = propScreen - propImg;
+
+       //console.log("screen W: " + w + " H: " + h);
+    	 //console.log("hImg W: " +  nImg.naturalWidth + " hImg H: " +
+    	 // nImg.naturalHeight);
+
+      if(Math.abs(delta) <= errorDelta) {
+        nImg.style.top = "0px";
+        nImg.style.left = "0px";
+        nImg.style.width = w.toString() + "px";
+     	  nImg.style.height = h.toString() + "px";
+      } else if(delta < 0) {
+        nImg.style.top = Math.floor(Math.abs((h - w*nImg.naturalHeight/nImg.naturalWidth)) / 2.0).toString() + "px";
+        nImg.style.left = "0px";
+        nImg.style.width = w.toString() + "px";
+     	  nImg.style.height = "auto";
+      } else {
+        nImg.style.top = "0px";
+        nImg.style.left = Math.floor(Math.abs((w - h*nImg.naturalWidth/nImg.naturalHeight)) / 2.0).toString() + "px";
+        nImg.style.width = "auto";
+     	  nImg.style.height = h.toString() + "px";
+      }
+      console.log("top: " + nImg.style.top + " left " + nImg.style.left + " width: " + nImg.style.width + " height: " + nImg.style.height);
+      return {t: nImg.style.top, l: nImg.style.left, w: nImg.style.width, h: nImg.style.height};
+    }
+
+   
+
+
+   function insertData(){
+		var out = "";
+    var i;
+    for(i = 0; i < arr.length; i++) {
+        out += '<a href="' + arr[i].url + '">' + 
+        arr[i].display + '</a><br>';
+    }
+		console.log(out.toString());
+   }
+
+    </script>
+</body>
+</html>

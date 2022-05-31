@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Memory game</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="memory.js"></script>
+    <style>
+        .panel img{
+            box-shadow: 10px 5px 5px #aaa;
+            border-radius: 30px;
+            margin: 5px; padding: 0px;
+             width: 200px; height: 194px;}
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <section id="panels">
+        <div id="pan1" class="panel">
+            <img src="blank.png" id="i0"/>
+            <img src="blank.png" id="i1" />
+            <img src="blank.png" id="i2"/>
+            <img src="blank.png" id="i3" />
+        </div>
+        <div id="pan2" class="panel">
+            <img src="blank.png" id="i4"/>
+            <img src="blank.png" id="i5"/>
+            <img src="blank.png" id="i6"/>
+            <img src="blank.png" id="i7"/>
+        </div>
+        <div id="pan3" class="panel">
+            <img src="blank.png" id="i8"/>
+            <img src="blank.png" id="i9"/>
+            <img src="blank.png" id="i10"/>
+            <img src="blank.png" id="i11"/>
+        </div>
+    </section>
+    <div style="text-align: center;"><h3>Wykonałeś <span id="moves">0</span> ruchów</h3></div>
+    <div id="winDiv" style="margin: 0  auto; text-align: center;display:none">
+      <img src='puchar.jpg' alt="puchar" onclick="restart();" />
+      <h2 id="winInfo">Wygrałeś! Czas ukończenia: sek. </h2>
+      <p>Klikinij na puchar, aby zacząć do nowa</p>
+    </div>
+
+</body>
+
+</html>

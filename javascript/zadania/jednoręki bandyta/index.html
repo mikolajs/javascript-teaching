@@ -1,0 +1,91 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+   body {margin: 0 auto; width: 100%; text-align: center;}
+   div {margin: 0 auto; width: 100%;}
+    .red { color: #d44; font-size: 0.8em;
+      font-family: monospace;}
+    .red span {color: #a66; font-size: 1.2em;
+     font-weight: bold; }
+  </style>
+  <script>
+  var kwota = 100;
+  var a = new Array();
+  a[1] = "1.png";
+  a[2] = "2.png";
+  a[3] = "3.png";
+  a[4] = "4.png";
+  a[5] = "5.png";
+  a[6] = "6.png";
+  var res = [1,2,3,4,5];
+
+  function push(){
+    if(kwota < 5) {
+      document.write("<h1>Jesteś bankrutem!</h1>");
+      return;
+    }
+    kwota -= 5;
+    for(var i = 0; i < 5; i++){
+      res[i] = Math.ceil(Math.random()*6);
+      document.getElementById('obrazek' + (i + 1)).src =
+       a[res[i]];
+    }
+    var max = win();
+    var prize = 0;
+    switch (max) {
+      case 1:
+        break;
+      case 2:
+        prize = 1;
+        break;
+      case 3:
+        prize = 2;
+        break;
+      case 4:
+        prize = 10;
+        break;
+      case 5:
+        prize = 50;
+        break;
+    }
+    kwota += prize;
+    document.getElementById('result').innerHTML = prize;
+    document.getElementById('money').innerHTML = kwota;
+  }
+
+  function win(){
+    res = res.sort();
+    var n = 1;
+    var max = 1;
+    for(var i = 1; i < 5; i++){
+      if(res[i] == res[i -1]) n++;
+      else {
+        if(n > max) max = n;
+        n = 1;
+      }
+    }
+    if(n > max) max = n;
+    return max;
+  }
+
+</script>
+</head>
+<body>
+  <div>
+
+
+  <h2>Kwota: <span id="money"> 100</span> zł
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="red"> Wygrana/strata:
+      <span id="result">0</span> zł</span> </h2>
+  <img src="1.png"  id="obrazek1"/>
+  <img src="2.png"  id="obrazek2"/>
+  <img src="3.png"  id="obrazek3"/>
+  <img src="4.png"  id="obrazek4"/>
+  <img src="5.png"  id="obrazek5"/>
+  <img style="width:100px;height:100px;"
+    src="push.jpeg" onclick="push()" id="push"/>
+  <br />
+  </div>
+</body>
+</html>

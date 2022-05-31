@@ -1,0 +1,20 @@
+<h1>Tabela przyrostu naturalnego UE w regionach</h1>
+<div ng-controller="View1Ctrl">
+  <select ng-model="country" ng-options="c.co for c in countries track by c.co">
+  </select>
+  <label> Sortuj według</labe> <select ng-model="sortHead" ng-options="h for h in headers" ng-change="mkSort()">
+  </select>
+  <label> <input type="radio" name="order" ng-model="order" value="A" ng-change="mkSort()"/> Rosnąco</label>
+  <label> <input type="radio" name="order" ng-model="order" value="D" ng-change="mkSort()"/> Malejąco</label>
+<table border="1">
+<thead><tr><th>Kraj</th><th>Region</th><th>Przyrost w %</th></tr></thead>
+<tbody>
+<tr ng-repeat="d in dane" ng-if="d.co == country.co">
+
+  <td>{{d.co}}</td>
+  <td>{{d.reg}}</td>
+  <td>{{d.up}}</td>
+</tr>
+</tbody>
+</table>
+</div>

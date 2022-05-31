@@ -1,0 +1,66 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<script>
+function whereIsMouse(event) {
+	var x = event.clientX;
+	var y = event.clientY;
+	document.getElementById('XY').innerHTML = "Mysz X " + x + " Y " + y;
+}
+
+function whereScrolled() {
+  var Y = document.body.scrollTop;
+	document.getElementById('scrollInfo').innerHTML = "scroll Y " + Y;
+	if(Y > 100  ) {
+		document.getElementById('mail').style.animationName = 'move';
+	}
+	if(Y <= 0)  	{
+		document.getElementById('mail').style.animationName = '';
+	}
+}
+
+function showedMail(){
+	document.getElementById('mail').style.animationName = 'move';
+}
+
+window.onbeforeunload = function() {
+  return "Are you sure you want to navigate away?";
+}
+
+function isOnScreen()
+{
+    var element = document.getElementById('mail');
+    var curPos = element.offset();
+    var curTop = curPos.top;
+    //var screenHeight = $(window).height();
+    console.log("current: "  + curTop);
+    //return (curTop > screenHeight) ? false : true;
+}
+</script>
+<style>
+body {margin: 0 auto;}
+.full {background-color: #da4; height: 100%;}
+#mail {
+
+    	animation-duration: 2s;
+	left: 0px;
+	position: absolute;
+       }
+
+@keyframes move {
+ 0% {left: 0%; }
+ 50% { left: calc(100% - 128px); }
+ 100% {left: 0%; }
+}
+</style>
+</head>
+<body onscroll="whereScrolled()">
+<div class="full" id="canvas" onmousemove="whereIsMouse(event);">
+<span id="XY"></span> <span id="scrollInfo" style="top:0px;right: 200px;position:fixed"></span>
+
+</div>
+<div>
+<img src="page_animation/mail.png" onfocus="" id="mail">
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wyliczanie potęgi</title>
+  <meta charset="utf-8" />
+  <script>
+    function oblicz() {
+     var A = parseInt(document.getElementById('A').value);
+     var N = parseInt(document.getElementById('N').value);  
+     var W = 1;
+     for(var i = 0; i < N; i++){
+         W *= A;
+     }
+     document.getElementById("ODP").innerHTML = "Potęga wynosi: " + W;
+   }
+  </script>
+</head>
+<body>
+  <label>A: </label><input type="number" id="A" /> <br/>
+  <label>N: </label><input type="number" id="N" /> <br/>
+  <button onclick="oblicz()">OK</button>
+  <h2 id="ODP"></h2>
+</body>
+</html>

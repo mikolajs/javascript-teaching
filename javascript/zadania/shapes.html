@@ -1,0 +1,20 @@
+<html>
+<head>
+<style>
+#facebook-icon { background: red; text-indent: -999em; width: 100px; height: 110px; border-radius: 5px; position: relative; overflow: hidden; border: 15px solid red; border-bottom: 0; } 
+
+#facebook-icon::before { content: "/20"; position: absolute; background: red; width: 40px; height: 90px; bottom: -30px; right: -37px; border: 20px solid #eee; border-radius: 25px; }
+ #facebook-icon::after { content: "/20"; position: absolute; width: 55px; top: 50px; height: 20px; background: #eee; right: 5px; }
+
+#yin-yang { width: 96px; height: 48px; background: #fff; border-color: red; border-style: solid; border-width: 2px 2px 50px 2px; border-radius: 100%; position: relative; }
+ #yin-yang:before { content: ""; position: absolute; top: 50%; left: 0; background: #fff; border: 18px solid red; border-radius: 100%; width: 12px; height: 12px; }
+ #yin-yang:after { content: ""; position: absolute; top: 50%; left: 50%; background: red; border: 18px solid #fff; border-radius:100%; width: 12px; height: 12px; }
+
+</style>
+</head>
+<body>
+<div id="facebook-icon"></div>
+<br>
+<div id="yin-yang"></div>
+</body>
+</html>

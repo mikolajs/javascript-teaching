@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<script type="text/javascript" src="gra.js">
+</script>
+<style type="text/css">
+img {padding: 5px;}
+</style>
+</head>
+<body>
+<h1>
+	<span id="info">Tura gracza:</span> 
+	<span id="who" style="color: red;">krzyżyk</span>
+</h1>
+<div style="width:350px; height:350px; background-image: url(bg.png);">
+<img src="empty.png" id="00" onclick="check(this)"/> 
+<img src="empty.png" id="10" onclick="check(this)"/>
+<img src="empty.png" id="20" onclick="check(this)"/>
+<br/>
+<img src="empty.png" id="01" onclick="check(this)"/> 
+<img src="empty.png" id="11" onclick="check(this)"/>
+<img src="empty.png" id="21" onclick="check(this)"/>
+<br/>
+<img src="empty.png" id="02" onclick="check(this)"/> 
+<img src="empty.png" id="12" onclick="check(this)"/>
+<img src="empty.png" id="22" onclick="check(this)"/>
+<br/>
+
+</div>
+<script type="text/javascript" >
+findWho();
+
+</script>
+</body>
+
+</html>

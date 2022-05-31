@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Wycieczka górska</title>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="mountains.js"></script>
+
+  </head>
+  <body>
+    <h1>Wycieczka górska</h1>
+    <canvas id="canvas" width="1200" height="300"></canvas>
+   <div>
+     <p>Droga do przebycia szczytami gór: <span id="way"></span></p>
+     <p>Suma wysokości punktów: <span id="maxH"></span></p>
+   </div>
+   <script type="text/javascript">
+     var main = new Main();
+     main.draw();
+     main.A();
+     main.B();
+   </script>
+  </body>
+</html>

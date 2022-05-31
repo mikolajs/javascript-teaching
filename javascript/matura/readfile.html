@@ -1,0 +1,44 @@
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+	<meta charset="utf8">
+    <title>Read Text File</title> 
+	
+</head> 
+  
+<body> 
+    <input type="file" name="inputfile"
+            id="inputfile"> 
+    <br> 
+   
+    <pre id="output"></pre> 
+    <script type="text/csv" src="liczby.txt" id="data" onload="test()">
+	wkleić zawartość pliku!!!
+</script>
+    <script type="text/javascript"> 
+
+        document.getElementById('inputfile') 
+            .addEventListener('change', function() { 
+              
+            var fr=new FileReader(); 
+            fr.onload=function(){ 
+                document.getElementById('output') 
+                        .textContent=fr.result; 
+            } 
+              
+            fr.readAsText(this.files[0]); 
+        });
+
+// from script tag csv NOT WORK :(
+	let d = document.getElementById("data").text;
+	console.log(d);
+	
+	function test(){ console.log("TEST");}
+	
+    </script> 
+</body> 
+  
+</html> 
+

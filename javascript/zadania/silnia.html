@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Wyliczanie silni</title>
+  <meta charset="utf-8" />
+  <script>
+    function oblicz() {
+     var N = parseInt(document.getElementById('N').value);  
+     var W = 1;
+     for(var i = 2; i <= N; i++){
+         W *= i;
+     }
+     document.getElementById("ODP").innerHTML = "silnia wynosi: " + W;
+   }
+  </script>
+</head>
+
+<body>
+  <label>N: </label><input type="number" id="N" /> <br/>
+  <button onclick="oblicz()">OK</button>
+  <h2 id="ODP"></h2>
+</body>
+
+</html>

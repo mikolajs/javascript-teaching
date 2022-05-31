@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="jquery-ui-1.12/jquery-ui.css">
+  <link rel="stylesheet" href="jquery-ui-1.12/jquery-ui.theme.css">
+  <script src="jquery-ui-1.12/jquery.js"></script>
+  <script src="jquery-ui-1.12/jquery-ui.js"></script>
+  <script src="jquery-ui-1.12/datepicker-pl.js"></script>
+  <script>
+  $(function() {
+     $( "button" ).button().click(function( event ) {
+        $( '#dialog-message' ).dialog('open');
+        event.preventDefault();
+      });
+      $( "#datepicker" ).datepicker({
+          dateFormat: "dd-mm-yy",
+          onClose: function(d, ui){
+              $("#dataDialog").text(d);
+          }
+      });
+    $( "#slider-range-min" ).slider({
+      range: "min",
+      value: 37,
+      min: 1,
+      max: 700,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value + " zł" );
+        $("#amountDialog").text( ui.value + " zł");
+      }
+    });
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      autoOpen: false,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+    $( "#amountDialog" ).text( $( "#slider-range-min" ).slider( "value" ) + " zł");
+    $("#dataDialog").text($( "#datepicker" ).val());
+    $.datepicker.regional[ $.datepicker.regional[ "pl" ] ];
+  });
+  </script>
+</head>
+<body>
+ <div style="width: 600px;">
+<p>Date: <input type="text" id="datepicker"></p>
+ <p>
+  <label for="amount">Kwota</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+ 
+<div id="slider-range-min"></div>
+<button style="float:right; margin: 20px;" onclik="">Zatwierdź wybór</button>
+ </div>
+ <div id="dialog-message" title="Twoje zamówienie">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+   Zamówiłeś wizytę dnia: <span id="dataDialog"></span> </p><p>
+   na kwotę: <span id="amountDialog"></span>
+  </p>
+
+</div>
+
+</body>
+</html>

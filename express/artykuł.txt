@@ -1,0 +1,160 @@
+<p><em>Jeśli chcesz wykonać poniższe zadania w domu musisz mieć zainstalowane w Ubuntu pakiety:<br />
+nodejs, nodejs-legacy i npm.</em></p>
+
+<h3>Instalacja</h3>
+
+<p>Tworzymy katalog dla projektu poleceniem i przechodzimy do niego:</p>
+
+<pre class="brush:bash;">
+mkdir nazwa_katalogu
+cd nazwa_katalogu</pre>
+
+<p>Następnie inicjujemy projekt Node poleceniem:</p>
+
+<pre class="brush:bash;">
+npm init</pre>
+
+<p>Teraz instalujemy framework express lokalnie zapisując konfigurację w pliku package.js:</p>
+
+<pre class="brush:bash;">
+npm install express --save</pre>
+
+<p>Następnie tworzymy plik app.js o zawartości:</p>
+
+<pre class="brush:jscript;">
+var express = require(&#39;express&#39;);
+var app = express();
+
+app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;Witaj na stronie NodeJS Express!&#39;);
+});
+
+var server = app.listen(3000, function () {
+
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log(&#39;Example app listening at http://%s:%s&#39;, host, port);
+
+});
+</pre>
+
+<p><br />
+Uruchamiamy serwer:</p>
+
+<pre class="brush:bash;">
+node app.js</pre>
+
+<p>W tej chwili obsługujemy tylko jeden adres czyli /. Dodawanie następnych podstron odbywa się poprzez dodawanie do obiektu app metody połączenia http (get, put, post, delete) np.:</p>
+
+<pre class="brush:jscript;">
+app.get(&#39;/api&#39;, function (req, res) {
+  res.send(&#39;Ścieżka do API&#39;);
+});</pre>
+
+<p>Teraz możemy wejść na adres&nbsp; względny: /api. Wejście wpisanie jakiegokolwiek innego adresu względnego skutkuje pojawieniem się informacji o niemożliwości otworzenia.</p>
+
+<p>Możemy r&oacute;wnież dodać statyczne pliki html, css i js. W tym celu tworzymy katalog static, a w nim kopiujemy jakiś własny lub tworzymy nowy plik html. Następnie do kodu JS dodajemy:</p>
+
+<pre class="brush:jscript;">
+app.use(express.static(&#39;static&#39;));</pre>
+
+<p>Możemy dodawać więcej katalog&oacute;w do serwowania plik&oacute;w statycznych, a gdy mają one mieć inny względy adres url to podajemy go w parametrze:</p>
+
+<pre class="brush:jscript;">
+app.use(&#39;/pliki&#39;, express.static(&#39;pliki&#39;));</pre>
+
+<p>Aby nasz plik index.html w katalogu static był wyświetlany po wejściu na ścieżkę /, wystarczy skasować app.get(&#39;/&#39;, ....)&nbsp;</p>
+
+<h4>Licznik odświeżeń</h4>
+
+<p>W bardzo prosty spos&oacute;b możemy sprawdzić i wyświetlić ile razy pobrano naszą stronę. Wystarczy w tym celu utworzyć link, kt&oacute;ry chcemy sprawdzać dodając go do aplikacji:</p>
+
+<pre class="brush:jscript;">
+app.get(&#39;/klik&#39;, function (req, res) {
+ licznik++;
+  res.send(&#39;&lt;h1&gt; Odświeżono: &#39; + licznik + &#39; razy&lt;/h1&gt;&#39;);
+});</pre>
+
+<p>Wcześniej&nbsp; dodajemy zmienną globalną:</p>
+
+<pre class="brush:jscript;">
+var licznik = 0;</pre>
+
+<p>Po zrestartowaniu aplikacji i wejściu na podstronę /klik wyświetli nam informację o odświeżeniach. Jest to zarazem przykład na to w jaki najprostszy spos&oacute;b przechowywać dane w w aplikacji. Spos&oacute;b ten ma jednak jedną wadę, po zamknięciu aplikacji tracimy wszystkie dane, ale za to szybkość ich zapisu i odczytu jest olbrzymia. Takie dane możemy co pewien czas zapisywać do jakieś bazy lub nawet pliku i wczytać ponownie po uruchomieniu aplikacji.</p>
+
+<h3>Pobieranie danych ze strony</h3>
+
+<p>Dodajemy do katalogu static w pliku index.html następującą zawartość:</p>
+
+<pre class="brush:xml;">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt; To jest plik z katalogu static &lt;/h1&gt;
+  &lt;form action=&quot;/form&quot; method=&quot;GET&quot;&gt;
+  &lt;label&gt;Imię:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;imie&quot; id=&quot;imie&quot;/&gt;&lt;br/&gt;
+  &lt;label&gt;Nazwisko:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;nazwisko&quot;  id=&quot;nazwisko&quot;/&gt;&lt;br/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;OK&quot; /&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>Możemy teraz dodać następną ścieżkę dla serwera:</p>
+
+<pre class="brush:jscript;">
+app.get(&#39;/form&#39;, function(req, res){
+  var odpowiedz = &#39;&lt;h1&gt; Nazwisko: &#39; + req.query.nazwisko +
+  &#39;, Imię: &#39; + req.query.imie + &#39;&lt;/h1&gt;&#39;;
+   res.send(odpowiedz);
+});</pre>
+
+<p>Po ponownym uruchomieniu aplikacji, wejściu na / i wpisaniu do formatek danych, a następnie kliknięciu OK, zostajemy przeniesieni do podstrony /form i tam wyświetla nam wpisane dane. Jeśli spojrzymy na adres strony to zobaczymy:</p>
+
+<pre class="brush:bash;">
+http://localhost:3000/form?imie=Jan&amp;nazwisko=Kowalski</pre>
+
+<p>Oznacza to, że wysłaliśmy dane do serwera metodą get, czyli w spos&oacute;b widoczny w adresie URL. Po znaku zapytania zaczynają się parametry. Parametry składają się z nazwy (identyfikatora), a po znaku r&oacute;wności wartości. Następny parametr jest oddzielny od poprzedniego znakiem &amp;.</p>
+
+<h4>Metoda POST</h4>
+
+<p>Aby zamienić wysyłanie danych na metodę POST wystarczy zmienić w html parametr w form na method=&quot;POST&quot;. Więcej zmian musimy wprowadzić w kodzie aplikacji JS:</p>
+
+<pre class="brush:jscript;">
+app.post(&#39;/form&#39;, function(req, res){
+  var odpowiedz = &#39;&lt;h1&gt; Nazwisko: &#39; + req.body.nazwisko +
+  &#39;, Imię: &#39; + req.body.imie + &#39;&lt;/h1&gt;&#39;;
+   res.send(odpowiedz);
+});</pre>
+
+<p>Niestety nie zadziała to bez pobrania dodatkowego pakietu i jego konfiguracji. Domyślnie Express nie obsługuje metody POST. Potrzebny jest pakiet, kt&oacute;ry instalujemy:</p>
+
+<pre class="brush:jscript;">
+npm install body-parser --save</pre>
+
+<p>Następnie wczytujemy pakiet:</p>
+
+<pre class="brush:jscript;">
+var bodyParser = require(&#39;body-parser&#39;);</pre>
+
+<p>Oraz wykorzystujemy go do analizy przychodzącego zapytania HTTP:</p>
+
+<pre class="brush:jscript;">
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));</pre>
+
+<p>Pierwsze polecenie analizuje przypadek, w kt&oacute;rym zawartość zapytania jest podana w formacie JSON, drugie zaś zajmuje się klasycznym sposobem przesyłania danych.<br />
+Teraz po zrestartowaniu i wpisaniu danych do formatki i kliknięciu OK znowu pojawi się ten sam napis co poprzednio.</p>
+
+<h3>Prosty serwis REST</h3>
+
+<p>REST - Representational state transfer to technologia służąca do dostarczania danych na żądanie z wykorzystaniem popularnego protokołu HTTP lub HTTPS. Zaletą jest możliwość wykorzystania sprawdzonej technologii. Zamiast pisać specjalne aplikacje działające sieciowo, wykorzystuje się popularne frameworki służące do tworzenia zaplecza dla stron internetowych.</p>
+
+<p>W technologii REST klienci zapytują serwer o dane najczęściej w postaci zwykłego adresu URL wraz z dodatkowymi parametrami. Zatem wystarczy, że będziemy wysyłać dane w oparciu o to jakie parametry otrzymamy w adresie URL.</p>
+
+<p>&nbsp;</p>

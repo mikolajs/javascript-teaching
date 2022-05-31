@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+<style>
+img.back {
+position: fixed;
+bottom: 0px;
+top: 0px;
+left: 0px;
+background-size: cover;
+width: 100%;
+height: auto;
+z-index: -1000;
+overflow: hidden;
+opacity: 1;
+}
+h1 {
+
+}
+h2 {
+font-family: sans-serif;
+font-variant: small-caps;
+color: white;
+font-size: 2em;
+font-weight: bold;
+}
+section {
+  font-style: italic;
+  font-family: cursive;
+  background-color: #FAB22B;
+  opacity: 0.7;
+  border-radius: 8px;
+  color: white;
+  margin:0 auto;
+  text-align: center;
+}
+span.button {
+ background-color: red;
+ color: white;
+ font-weight: bold;
+ padding: 10px;
+ border-radius: 8px;
+ border: 3px solid #f77;
+ cursor: pointer;
+}
+nav {
+  background-color: #111;
+  height: 40px;
+  width: 100%;
+}
+ul.menu {
+  float: right;
+}
+ul.menu li {
+  color: white;
+  background-color: red;
+  padding: 5px;
+  margin: 0 10px;
+  height: 25px;
+  display: inline;
+  list-style-type: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+}
+article {width: 100%; margin: 0 auto; text-align: center;
+  padding: 0 20px 20px 20px;
+}
+ul.menu li:last-child { margin-right: 50px;}
+
+footer {
+  color: #ddd;   font-family: cursive;
+  background-color: #122;  text-align: center;
+  opacity: 0.99;
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+#top {text-shadow: 6px 6px #111; margin: 10px 0 auto;}
+#buy {
+   background-color: #cfb;
+   color: #545;
+   margin: 10px 0 auto;
+}
+#buy h1 {text-shadow: 6px 6px #111;
+  color: #eee;;
+  font-family: sans-serif;
+  font-variant: small-caps;
+  font-size: 4em;
+  font-weight: bold;
+ }
+ #table {
+   text-shadow: 6px 6px #111; margin: 10px 0 auto;
+   height: 200px;
+   vertical-align: text-bottom;
+ }
+ #links {
+   background-color: #221;
+ }
+.col-3 {
+  float: left;
+  height: inherit;
+  width: 30%;
+   vertical-align: text-bottom;
+}
+</style>
+</head>
+<html>
+<body style="width:100%; margin: auto;">
+  <nav >
+    <img src="logo.png" />
+    <ul class="menu">
+      <li>Kup bilet</li>
+      <li>Kontakt</li>
+    </ul>
+  </nav>
+<section>
+<img src="park.jpg" class="back" />
+<article id="top">
+    <h2>Witamy w Biebrzańskim parku narodowym</h2>
+<img class="center" src="emblemat2.png"/>
+</article>
+<article id="buy">
+  <h1>Zakup biletów do parku</h1>
+  <p style="background-color" >W okresie od października od maja obowiązują ceny promocyjne ze zniżką 50%</p>
+  <span class="button">Kup biltet</span>
+</article>
+<article id="table">
+<div class="col-3"><img src="rower.png" />
+<p>Wycieczka rowerowa</p>
+</div>
+<div class="col-3"><img src="szlak.png" />
+<p>Wycieczka piesza</p>
+</div>
+<div class="col-3"><img src="kompas.png" />
+<p>Wycieczka z przewodnikiem</p>
+</div>
+</article>
+<div style="float:both;"></div>
+<article id="links"></article>
+</section>
+<footer>Strona przygotowana jako wzorzec na zajęcia z Witryn i Aplikacji internetowych @autor: Mikołaj Sochacki</footer>
+</body>
+</html>

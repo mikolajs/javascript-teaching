@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap page example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script>
+  $(document).on('click', 'a.menu', function(event){
+  event.preventDefault();
+
+  $('html, body').animate({
+      scrollTop: $( $.attr(this, 'href') ).offset().top
+  }, 500);
+});
+  </script>
+  <style>
+  body {
+
+  }
+  footer { background-color: black; color: #cce; min-height: 50px;
+          text-align: center; padding: 5px; margin-top: 20px;
+  }
+  #background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url(background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-clip: content-box;
+    background-size: cover;
+    z-index: -1;
+    background-color: red;
+    opacity: 0.5;
+  }
+  #section1, #section3, #section5 {padding-top:50px;height:500px;color: #333;}
+  #section2 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+  #section4 {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<div id="background"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Ż A K</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a class="menu" href="#section1">Góra</a></li>
+          <li><a class="menu" href="#section2">Oferta</a></li>
+          <li><a class="menu" href="#section3">O szkole</a></li>
+          <li><a class="menu" href="#section4">Oddziały</a></li>
+          <li><a class="menu" href="#section5">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="section1" class="container-fluid">
+  <h1>Section 1</h1>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+</div>
+<div id="section2" class="container-fluid">
+  <h1>Section 2</h1>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+</div>
+<div id="section3" class="container-fluid">
+  <h1>Section 3</h1>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+</div>
+<div id="section4" class="container-fluid">
+  <h1>Section 4 Submenu 1</h1>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+</div>
+<div id="section5" class="container-fluid">
+  <div class="well">
+  <h1>Kontakt</h1>
+ <form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Imię i nazwisko:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="Imię i nazwisko">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Wyrażam zgodę na przetwarzanie podanych danych osobowych w celach korespondencji
+        </label>
+      </div>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="contentEmail" class="col-sm-2 control-label">Treść emaila:</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="3" id="contentEmail"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+  </div>
+</form>
+  </div>
+</div>
+<footer class"row"><div class="col-sm-offset-2 col-sm-8">Programmed on WiAI lesson by Mikolaj Sochacki
+<a href="#section1" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-menu-up"></span> Do góry</a></div></footer>
+</body>
+</html>

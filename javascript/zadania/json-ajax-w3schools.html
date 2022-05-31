@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Pobieranie z innej lokacji danych niż serwer pobrania pliku nie działa! </h1>
+<h2>Możemy korzystać z jsonp na serwerach,które go udostępniają, lub używać naszego serwera jako proxy</h2>
+<div id="id01"></div>
+<hr>
+<div id="div1"></div>
+<hr>
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://www.w3schools.com/js/myTutorials.txt";
+
+xmlhttp.onreadystatechange = function() {
+    console.log("reolad");
+    if (this.readyState == 4 && this.status == 200) {
+	console.log("ready");
+        var myArr = JSON.parse(this.responseText);
+        myFunction(myArr);
+    } else {console.log("not ready status: " + this.status)};
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+    var out = "";
+    var i;
+    for(i = 0; i < arr.length; i++) {
+        out += '<a href="' + arr[i].url + '">' + 
+        arr[i].display + '</a><br>';
+    }
+    document.getElementById("id01").innerHTML = out;
+}
+
+
+ $.getScript( "http://www.w3schools.com/js/Customers_MYSQL.php", function( data, textStatus, jqxhr ) {
+  console.log( data ); // Data returned
+  console.log( textStatus ); // Success
+  console.log( jqxhr.status ); // 200
+  console.log( "Load was performed." );
+});
+
+</script>
+<h2>Serwer zwraca nagłówek: header("Access-Control-Allow-Origin: *"); Dlatego możemy pobrać z niego dane</h2>
+<div id="id02"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://www.w3schools.com/js/Customers_MYSQL.php";
+
+xmlhttp.onreadystatechange=function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction1(this.responseText);
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction1(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out = "<table>";
+
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" + 
+        arr[i].Name +
+        "</td><td>" +
+        arr[i].City +
+        "</td><td>" +
+        arr[i].Country +
+        "</td></tr>";
+    }
+    out += "</table>";
+    document.getElementById("id02").innerHTML = out;
+}
+</script>
+</body>
+</html>
