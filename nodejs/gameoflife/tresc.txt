@@ -1,0 +1,24 @@
+Gra w życie została wymyślona w 1970 roku przez Johna Conwaya.
+Rozpatrujemy wariant, w którym plansza składa się z komórek rozmieszczonych obok siebie na prostokątnej siatce o wymiarach n × m, w której numeracja wierszy i kolumn zaczyna się od 1. Każda komórka może być w jednym z dwóch stanów: żywa ”X” lub martwa ”.”. Przyjmijmy, że komórki z prawej krawędzi siatki sąsiadują z komórkami z lewej krawędzi siatki, a komórki z górnego wiersza sąsiadują z komórkami dolnego wiersza siatki. Każda komórka ma 8 sąsiadów, połączonych z nią bokiem lub wierzchołkiem. Układ komórek podlega ewolucji. W następnym pokoleniu będą żywe tylko te komórki, które w bieżącym pokoleniu spełniają jeden z dwóch warunków:
+• Komórka jest żywa i ma dwóch lub trzech żywych sąsiadów (inaczej umiera z samotności lub na skutek zbyt dużego zagęszczenia).
+• Komórka jest martwa, ale ma dokładnie trzech żywych sąsiadów.
+Uwaga:
+Planszę stanu komórek w nowym pokoleniu można wyznaczyć, tylko jeżeli ma się kompletne dane z poprzedniego pokolenia.
+Przykład:
+Pierwsze pokolenie:             Drugie pokolenie:
+
+. . . . . . . . .      . . . . . . . . .
+. . . . . . . . .      . . . . X . . . .
+. . . X X X . . X      . . . X . X . . .
+. . . X X X . . X      X . . X . X . X X
+. . . . . . . . X      . . . . X . . . .
+. . . . . . . . .      . . . . . . . . .
+. . . . . . . . .      . . . . . . . . .
+
+Dla przykładu – w drugim pokoleniu komórka będąca w trzecim wierszu i dziewiątej kolumnie jest martwa i ma trzech żywych sąsiadów. W pliku gra.txt zapisany jest układ komórek na siatce o wymiarach: 12 wierszy i 20 kolumn – rozmieszczenie żywych i martwych komórek w pierwszym pokoleniu. Każdy wiersz siatki jest zapisany w osobnym wierszu pliku. Uwaga: Dla przykładu z pliku – w jedenastym pokoleniu – komórka w pierwszym wierszu i dziesiątej kolumnie jest martwa i ma trzech żywych sąsiadów. Napisz program, który da odpowiedzi do poniższych poleceń.
+
+A. Podaj liczbę żywych sąsiadów dla komórki w drugim wierszu i dziewiętnastej kolumnie w trzydziestym siódmym pokoleniu.
+
+B. Podaj liczbę żywych komórek w drugim pokoleniu tego układu.
+
+C. W którym pokoleniu (sprawdzamy maksymalnie do 100) układ żywych i martwych komórek się ustali (w bieżącym pokoleniu jest identyczny jak w poprzednim)? Podaj, które to pokolenie oraz liczbę żywych komórek w tym pokoleniu.

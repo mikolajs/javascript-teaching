@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gra w życie – PIXI.JS</title>
+    <script type="text/javascript" src="pixi-legacy.min.js"></script>
+    <script type="text/javascript" src="zycie.js"></script>
+    <script type="text/javascript" src="gra.js"></script>
+    <style media="screen">
+     #lewa { width: 65%; margin: 5px 20px; float: left;}
+     #prawa {width: 30%; float: right;}
+     input {width: 50px;}
+    </style>
+  </head>
+  <body>
+    <div id="lewa"> </div>
+    <div id="prawa">
+      <button type="button" onclick="gra.start();">Rozpocznij</button><br>
+      <label>Pokolenie:</label><input type="text" id="pokolenie" value="1" />
+      <button type="button" onclick="gra.nastepne();">Następne</button>
+    </div>
+  <script>
+  var gra = new Gra();
+  </script>
+  </body>
+</html>

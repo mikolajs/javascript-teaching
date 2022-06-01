@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game Of Life</title>
+    <script src="/pixi-legacy.min.js"></script>
+    <script src="/life.js"></script>
+    <script src="/point.js"></script>
+    <script src="/game.js"></script>
+  <style media="screen">
+    #gamePools {width: 65%;  margin: 5px 20px; float:left;}
+    #gameControl {width: 30%; float: right;}
+   canvas { background-color: green; border: 2px solid black;}
+   input {width: 50px;}
+  </style>
+  </head>
+  <body>
+    <div id="gamePools">
+
+    </div>
+    <div id="gameControl">
+      <input type="text" value="1" id="generation" readonly><br/>
+      <button onclick="game.mkNewGeneration();">Następna generacja</button><br/>
+      <p>Ilość organizmów: <span id="lifes"></span></p>
+      <button onclick="game.backToBegin();">Powrót do początku</button><br/>
+      <input type="number" value="15" min="3" max="30" id="howmany"><br/>
+      <button onclick="game.mkRandomStart();">Losuj układ startowy</button>
+    </div>
+    <script>
+     var game = new Game();
+    </script>
+  </body>
+</html>

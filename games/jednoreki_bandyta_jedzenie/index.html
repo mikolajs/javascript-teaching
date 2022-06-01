@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Owoce</title>
+    <script src="skrypt.js"></script>
+
+    <style media="screen">
+      .linia img {padding-right: 20px;padding-bottom: 20px; text-align: center;}
+      #zdrowieImg {position: relative; top: 0; left: -210px;}
+      div.linia, div#zdrowie {display: inline-block; padding: 20px;
+        vertical-align: middle;}
+    </style>
+  </head>
+  <body>
+    <h2 id="endGame">Twoje zdrowie: <span id="health">80</span>%</h2>
+    <section style="height:400px;">
+      <div class="linia">
+        <div class="srodekLinii">
+        <img src=""  id="L1">
+        <img src=""  id="L2">
+        <img src=""  id="L3">
+        <img src="img/push.jpg" style="width:100px;height:100px;" onclick="gry.losuj()">
+      </div>
+      </div>
+      <div id="zdrowie">
+          <canvas height="400" width="200" id="canvas"></canvas>
+          <img src="zdrowie.png" alt="" id="zdrowieImg" height="400" width="210">
+      </div>
+    </section>
+    <h2 id="wynik"></h2>
+    <script type="text/javascript">
+       var gry = new Gra();
+    </script>
+  </body>
+</html>
