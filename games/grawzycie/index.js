@@ -73,5 +73,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8888, 'localhost', () => {
-  console.log('Serwer uruchomiono na http://localhost:8888' );
+  console.log('Serwer uruchomiono na http://localhost:8888/gra-pixi.html' );
 });

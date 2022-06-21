@@ -1,2 +1,0 @@
-Development webbrowser:
-chromium-browser --args --allow-file-access-from-files -enable-webgl --ignore-gpu-blacklist
