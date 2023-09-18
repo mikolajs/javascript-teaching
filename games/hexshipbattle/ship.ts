@@ -2,20 +2,19 @@
 /// <reference path="./map.ts" />
 
 class Ship {
-  x: number;
-  y: number;
-  map: HexMap;
-  sizeX: number; sizeY: number;
-  shipBitmap: createjs.Bitmap;
 
-  constructor(stage: createjs.Stage, map: HexMap){
-      this.map = map;
+  constructor(stage, map){
+      this.map = map; //HexMap
       this.shipBitmap = new createjs.Bitmap("ship.png");
       this.shipBitmap.image.onload = this.handleImage;
-      stage.addChild(this.shipBitmap);
+      stage.addChild(this.shipBitmap); //createjs.Stage
+      this.x = 0;
+      this.y = 0;
+      this.sizeX = 0;
+      this.sizeY = 0;
   }
 
-  setPosition(x: number, y: number){
+  setPosition(x, y){
     this.x = x;
     this.y = y;
     let point = this.map.getCenterOfPoolInPixels(x, y);
@@ -27,7 +26,7 @@ class Ship {
     // console.log(this.shipBitmap.x + "::" + this.shipBitmap.y + " px");
   }
 
-  handleImage = (evt: Event) => {
+  handleImage = (evt) => {
     console.log("Handle Ship Image");
     this.shipBitmap.scaleX = 0.7;
     this.shipBitmap.scaleY = 0.7;

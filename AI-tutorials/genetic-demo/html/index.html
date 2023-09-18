@@ -1,0 +1,50 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="img/logo.png"/>
+  <title>Landshunger</title>
+  <script src="lib/pixi.min.js"></script>
+  <script src="src/hexpoint.js"></script>
+  <script src="src/plainpoint.js"></script>
+  <script src="lib/hexlib.js"></script>
+  <script src="src/mapgenerator.js"></script>
+  <script src="src/animal.js"></script>
+  <script src="src/theworld.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/grid.js"></script>
+  <script src="src/map.js"></script>
+  
+<style> * {padding: 0; margin: 0}
+ canvas { float: left;}
+ #scrollUp, #scrollDown, #scrollLeft, #scrollRight {
+   padding: 0; margin: 0; display: block;
+   background-color: black; color: white;
+ }
+ #scrollUp, #scrollDown {
+   width: 1260px; height: 20px; margin-left: 20px; margin-right: 20px;
+   text-align: center;
+ }
+ #scrollLeft, #scrollRight {
+   width: 20px; height: 612px; display: inline;
+ }
+ #scrollLeft { float: left;}
+ #scrollRight { float: left;}
+ #empty {  width: 1260px; height: 612px;  padding: 0; margin: 0; display: block;}
+</style>
+</head>
+<body>
+   <div id="info"></div>
+   <div>
+   <fieldset>
+    <label for="">lasy<input type="number" max="30" min ="0"  id="woods"> %</label>
+    <button id="indexes">Numery pól</button>
+  </fieldset>
+   </div>
+
+  <script type="text/javascript">
+    var main = new Main();
+   </script>
+
+</body>
+</html>
