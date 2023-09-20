@@ -86,7 +86,7 @@ exports.distanceNeighbours = function distanceN(path, graphWithId){
 
 }
 
-class HamiltonPath {
+class FullPath {
   constructor(arr, distance = 0){
     this.path = arr;
     this.distance = distance;
@@ -96,4 +96,4 @@ class HamiltonPath {
   }
 }
 
-exports.HamiltonPath = HamiltonPath
+exports.FullPath = FullPath
