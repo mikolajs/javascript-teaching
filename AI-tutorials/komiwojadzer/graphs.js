@@ -96,4 +96,32 @@ class FullPath {
   }
 }
 
-exports.FullPath = FullPath
+exports.FullPath = FullPath;
+
+class WorkPath {
+  constructor(size){
+    this.path = [];
+    this.have = [];
+    this.distance = 0;
+  }
+  fillHave(nodesSize){
+    for(let i = 0; i < nodesSize; i++) this.have.push(false);
+  }
+  print(){
+    console.log(this.path.join(' ') + ' distance: ' + this.distance );
+  }
+  printNames(nodeNames){
+    console.log(this.path.map((n) => nodeNames[n]).join(' ') + ' distance: ' + this.distance );
+  }
+  copy(node, distance){
+    let wp = new WorkPath(this.have.size);
+    wp.path = Array.from(this.path);
+    wp.path.push(node);
+    wp.distance = this.distance + distance;
+    wp.have = Array.from(this.have);
+    wp.have[node] = true;
+    return wp;
+  }
+}
+
+exports.WorkPath = WorkPath;
