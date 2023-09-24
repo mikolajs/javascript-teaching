@@ -82,7 +82,6 @@ exports.distance = function distance(start, end, graphs) {
 exports.distanceNeighbours = function distanceN(path, graphWithId){
   path.unshift(path[path.length-1]);
   console.log(path);
-  
 
 }
 
@@ -99,7 +98,7 @@ class FullPath {
 exports.FullPath = FullPath;
 
 class WorkPath {
-  constructor(size){
+  constructor(){
     this.path = [];
     this.have = [];
     this.distance = 0;
@@ -125,3 +124,37 @@ class WorkPath {
 }
 
 exports.WorkPath = WorkPath;
+
+function distanceWithIds(start, end, graphsNumb) {
+  let distances = [];
+  for(let i = 0; i < graphsNumb.length; i++) distances.push(Number.MAX_VALUE);
+  let toCheck = [];
+  distances[start] = 0;
+  toCheck.push(start);
+  while (toCheck.length > 0) {
+    let id = toCheck.pop();
+    //console.log('startName = %s distance %f', name, graphs[name].distance);
+    for (let arr of graphsNumb[id]) {
+      let i = arr[0];
+      let d = arr[1];
+      //console.log('check name  %s distance %d', n, d);
+      if (distances[i] > distances[id] + d) {
+        //console.log('change %s += %d', n, d);
+        distances[i] = distances[id] + d;
+        toCheck.push(i);
+      }
+    }
+  }
+  return distances[end];
+}
+
+
+exports.countWay = function countWay(workPath, graphNumb){
+  let fullDistance = 0;
+  let start = 0;
+  for(let id of workPath.path){
+    fullDistance += distanceWithIds(start, id, graphNumb);
+    start = id;
+  }
+  return fullDistance;
+}

@@ -1,0 +1,12 @@
+reate graf 8
+size of found paths 6
+E H G F D C B A distance: 16
+create graf 12
+size of found paths 102
+K G B L C E H J F I D A distance: 89
+create graf 20
+size of found paths 9006
+P Q J R O L H G B F M E I T N D S C K A distance: 157
+create graf 30
+size of found paths 2412
+AK AM AL AP BD AY AJ AS AU AO BC AC AH AG AE AB AT AN BA AW BB AV AQ AD AZ AX AF AR AI AA distance: 310

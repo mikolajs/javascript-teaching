@@ -24,7 +24,13 @@ function main(){
     nodesSize = nodeNames.length;
     //console.log(graphsNumb);
     foundPaths = [];
-    foundByPermutation(graphsNumb);
+    //foundByPermutation(graphsNumb);
+    let wp = new graphCreator.WorkPath();
+    wp.fillHave(nodesSize);
+    foundByRecursion(wp);
+    for(let j in foundPaths){
+      foundPaths[j].distance = graphCreator.countWay(foundPaths[j], graphsNumb);
+    }
     console.log('size of found paths %d', foundPaths.length);
     let pos = 0;
     let max = Number.MAX_SAFE_INTEGER;
@@ -70,9 +76,25 @@ function foundByPermutation(graphs){
     }
    //console.log('size of stack %d', stack.length);
   }
+}
+
+  function foundByRecursion(wp){
+    //if(wp.path.length < 5)
+     // console.log(wp);
+    if(wp.path.length >= nodesSize - 1) {
+      wp.have[nodesSize-1] = true;
+      wp.path.push(0);
+      foundPaths.push(wp);
+      return;
+    }
+    for(let id = 1; id < nodesSize; id++){
+      if(!wp.have[id]){
+        let wp2 = wp.copy(id, 0);
+        wp2.have[id] = true;
+        foundByRecursion(wp2)
+      }
+    }
+  }
   
  
-  
-  
-  
-}
+

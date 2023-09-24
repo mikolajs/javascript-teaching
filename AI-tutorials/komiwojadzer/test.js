@@ -25,3 +25,6 @@ const graphNumb = graphNumbData.e;
 }
 */
 console.log(graphNumb);
+let arr = [45, 67, 89, 22, 32, 56, 54];
+arr.splice(1, 1);
+console.log(arr);
