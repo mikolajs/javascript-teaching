@@ -1,7 +1,6 @@
 
 const graphCreator = require('./graphs.js');
 const Graph = require('./graph.js');
-const { start } = require('repl');
 let arr = [8, 12, 20, 30, 40, 50, 60, 80, 200];
 
 let antsNumber = 5;
@@ -15,6 +14,7 @@ let nodeSize;
 let nodesSet = new Set();
 let maxDistance = Number.MIN_SAFE_INTEGER;
 let minDistance = Number.MAX_SAFE_INTEGER;
+let medium = 0;
 
 class Ant {
   constructor(start) {
@@ -27,9 +27,9 @@ class Ant {
 function main() {
   for (const nr of arr) {
     if (nr > 20) continue;
-    antsNumber = nr * 2;
-    maxAntsNumber = nr * nr;
-    endGeneration = Math.ceil(nr * nr / 5);
+    antsNumber = Math.floor(3*nr * nr+ nr);
+    maxAntsNumber = antsNumber * 4;
+    endGeneration = Math.ceil(nr * nr / 4);
     ants = [];
     graphObj = graphCreator.createGraph(nr);
     graph = graphObj.g;
@@ -50,13 +50,17 @@ function main() {
 
 
     createRandomGeneration(nodesSet);
+    _findMaxMinDistance();
+    printBestAnts();
     console.log('START file number %d from %s', nr, startNode);
     console.log('Started generation has %d ants', ants.length);
+    console.log('antsNumber %d, maxAntsNumber %d, endGeneration %d', antsNumber, maxAntsNumber, endGeneration);
+    printBestAnts();
     for (let generation = 2; generation < endGeneration; generation++) {
       evolution();
       //killAnts();
-      //surrvive();
-      printBestAnts();
+      surrvive();
+      //printBestAnts();
     }
 
     console.log('there is %d ant at end', ants.length);
@@ -67,7 +71,6 @@ function main() {
 }
 
 main();
-
 
 function createRandomGeneration(nodesSet) {
   let nodes = [];
@@ -87,10 +90,13 @@ function createRandomGeneration(nodesSet) {
 function _findMaxMinDistance() {
   maxDistance = Number.MIN_SAFE_INTEGER;
   minDistance = Number.MAX_SAFE_INTEGER;
+  medium = 0;
   for (let i = 0; i < ants.length; i++) {
     if (maxDistance < ants[i].distance) maxDistance = ants[i].distance;
     if (minDistance > ants[i].distance) minDistance = ants[i].distance;
+    medium += ants[i].distance;
   }
+  medium /= ants.length;
 }
 
 function _mkGene(nodes) {
@@ -114,88 +120,91 @@ function _mkGene(nodes) {
 function evolution() {
   _findMaxMinDistance();
   //console.log('start evolution');
-  let delta = maxDistance - minDistance;
-  let newAnts = [];
-  let fullLoops = 10;
-  while (true) {
-    console.log('evolution while true');
-    for (let i in ants) {
-      let adoption = (maxDistance - ants[i].distance) / delta;
-      //console.log('adoption %d, distance %d, max %d, min %d', adoption, ants[i].distance, maxDistance, minDistance);
-      if (adoption < 0.5) {
-        let a = new Ant(Array.from(ants[i].gene));
-        _muteGene(a);
-        a.distance = checkDistance(a);
-        if (0.5 < (maxDistance - a.distance) / delta) {
-          newAnts.push(a);
-        } 
-      }
-      /* if(3*Math.random() < 2*adoption){
-         let a = new Ant(ants[i].gene);
-         a.distance = ants[i].distance;
-         ants.push(a);
-       } */
-      if (Math.random() < adoption) {
-        //console.log('MUTATION adoption %d, distance %d', adoption, ants[i].distance);
-        let a = new Ant(Array.from(ants[i].gene));
-        _muteGene(a);
-        a.distance = checkDistance(a);
-        newAnts.push(a);
-      }
-    }
-    if(maxAntsNumber < newAnts.length) break;
-    if(fullLoops-- <= 0) break;
-  }
-
-}
-
-function killAnts() {
-  _findMaxMinDistance();
-  let howManyToKill = Math.floor((ants.length - antsNumber) * (0.5 + Math.random()));
-  let delta = maxDistance - minDistance;
-  while (howManyToKill > 0) {
-    for (let i in ants) {
-      let adoption = (ants[i].distance - minDistance) / delta;
-      if (Math.random() > adoption) {
-        ants.splice(i, 0);
-        howManyToKill--;
-      }
-      if (howManyToKill <= 0) break;
-    }
-  }
-}
-
-function surrvive() {
-  _findMaxMinDistance();
-
-  let howManyToSurrvive = antsNumber * (0.8 + 0.4 * Math.random());
-  let delta = maxDistance - minDistance;
-  let newAnts = [];
-  for (let i in ants) {
-    let adoption = (maxDistance - ants[i].distance) / delta;
-    //console.log('adoption; %d, distance %d for suvirrver max %d, min', adoption, ants[i].distance, minDistance, maxDistance);
-    if (adoption > 0.9) {
-      //console.log('adoption; %d, distance %d for suvirrver', adoption, ants[i].distance);
-      newAnts.push(ants[i]);
-      howManyToSurrvive--;
-    }
-  }
-  if (howManyToSurrvive <= 0) {
-    //console.log('to many good ants? %d', newAnts.length);
-    ants = newAnts;
+  if(ants.length == 0) {
+    console.log("NO ANTS!!!!!");
     return;
   }
-  for (let i in ants) {
-    let adoption = (maxDistance - ants[i].distance) / delta;
-    if (adoption > 0.4 && adoption > Math.random()) {
-      newAnts.push(ants[i]);
-      howManyToSurrvive--;
-      if (howManyToSurrvive <= 0) {
-        ants = newAnts;
-        return;
+  let delta = maxDistance - minDistance;
+  let loops = maxAntsNumber*5;
+  let i = 0;
+  while (true) {
+    let adoption = countAdoption(ants[i].distance, delta);
+    //console.log('adoption %d, distance %d, max %d, min %d', adoption, ants[i].distance, maxDistance, minDistance);
+
+    if (Math.random() < adoption) {
+      let a = new Ant(Array.from(ants[i].gene));
+      _muteGene(a);
+      a.distance = checkDistance(a);
+      if(a.distance < medium) ants.push(a);
+      //console.log('evolve mutate distance %d', a.distance);
+      
+    }
+    if(Math.random() < adoption*0.6){
+      ants.push(ants[i]);
+    }
+    
+    i++;
+    i %= ants.length;
+    if (maxAntsNumber < ants.length) break;
+    if (loops-- <= 0) break;
+  }
+
+}
+/*
+function killAnts() {
+  console.log('start killing ');
+  _findMaxMinDistance();
+  let delta = maxDistance - minDistance;
+  let newAnts = [];
+  let adoption = 0;
+  while (true) {
+    for (let i in ants) {
+      adoption = (maxDistance - ants[i].distance) / delta;
+      if (Math.random() < adoption) {
+        newAnts.push(ants[i])
+        //ants.splice(i, 0);
+        if (howManyToSurrvive <= newAnts.length) break;
       }
+      if (howManyToSurrvive <= newAnts.length) break;
     }
   }
+  ants = newAnts;
+}
+*/
+
+function surrvive() {
+  //console.log('start survive');
+  if(ants.length == 0) {
+    console.log("NO ANTS!!!!!");
+    return;
+  }
+  _findMaxMinDistance();
+
+  let delta = maxDistance - minDistance;
+  if(delta == 0) delta = 1;
+  let newAnts = [];
+  let i = 0;
+  let turn = 1;
+  while(true){
+    let adoption = countAdoption(ants[i].distance, delta);
+    //console.log('adoption: %d, delta %d', adoption, delta);
+    if(Math.random() < adoption*turn){
+      newAnts.push(ants[i]);
+    }
+    i++;
+    if(i % ants.length == 0) {
+      i = 0;
+      turn += 0.2;
+    }
+    if(newAnts.length >= antsNumber) break;
+    if(turn > 10) break;
+  }
+  //console.log('to many good ants? %d', newAnts.length);
+  ants = newAnts;
+}
+
+function countAdoption(distance, delta){
+    return 0.5+0.5*((medium - distance) / delta);
 
 }
 
@@ -204,11 +213,13 @@ function printAnts() {
 }
 
 function printBestAnts() {
-  //console.log('best ants: min %d max %d all ants %d', minDistance, maxDistance, ants.length);
+  console.log('best ants: min %d max %d all ants %d', minDistance, maxDistance, ants.length);
   _findMaxMinDistance();
-  console.log('best ants after MixMax: min %d max %d all ants %d', minDistance, maxDistance, ants.length);
   for (let i = 0; i < ants.length; i++) {
-    if (ants[i].distance == minDistance) ants[i].println();
+    if (ants[i].distance == minDistance) {
+      ants[i].println();
+      break;
+    }
   }
 }
 
@@ -224,7 +235,7 @@ function checkDistance(ant) {
 }
 
 function _muteGene(ant) {
-  let nr = Math.ceil(2 * Math.random());
+  let nr = Math.ceil(ants.length / 2 * Math.random());
   let tmp = '';
   let b = 0;
   let e = 0;
@@ -232,6 +243,7 @@ function _muteGene(ant) {
     b = Math.floor(Math.random() * (ant.gene.length - 1));
     e = Math.floor(Math.random() * (ant.gene.length - 1));
     if (b != e) {
+      //console.log('mute from %d to %d', b, e);
       tmp = ant.gene[e];
       ant.gene[e] = ant.gene[b];
       ant.gene[b] = tmp;
