@@ -11,7 +11,7 @@ exports.createGraph = function createGraph(nr){
   let edgesSet = new Set();
   let graphs = [];
   let ids = 0;
-  console.log('create graf %d', nr);
+  //console.log('create graf %d', nr);
   for (let line of dane) {
       //console.log(line);
       edgesSet.add(line[0]);
@@ -147,7 +147,6 @@ function distanceWithIds(start, end, graphsNumb) {
   }
   return distances[end];
 }
-
 
 exports.countWay = function countWay(workPath, graphNumb){
   let fullDistance = 0;

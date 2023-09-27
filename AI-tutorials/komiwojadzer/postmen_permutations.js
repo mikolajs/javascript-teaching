@@ -1,7 +1,6 @@
 const fs = require('fs');
 const graphCreator = require('./graphs.js');
 const graph = require('./graph.js');
-const { connect } = require('http2');
 
 let arr = [8, 12, 20, 30, 40, 50, 60, 80, 200];
 let nodesSize = 0;
