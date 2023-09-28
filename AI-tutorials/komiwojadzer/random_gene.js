@@ -13,9 +13,6 @@ let graph;
 let startNode;
 let nodeSize;
 let nodesSet = new Set();
-let maxDistance = Number.MIN_SAFE_INTEGER;
-let minDistance = Number.MAX_SAFE_INTEGER;
-let medium = 0;
 let timers;
 let bestAnt;
 
@@ -43,8 +40,7 @@ function main() {
         nodeSize = graphObj.s.length;
         nodesSet = graphObj.s;
         //console.log(nodesSet);
-        maxDistance = Number.MIN_SAFE_INTEGER;
-        minDistance = Number.MAX_SAFE_INTEGER;
+     
 
         //let testAnt = ['B', 'C', 'D', 'F', 'G', 'H', 'E', 'A'];
         //let testAnt2 = ['E', 'H', 'D', 'C', 'F', 'B', 'G', 'A'];
@@ -69,7 +65,7 @@ function main() {
 
             timers.stop(1);
             for (let i in ants) {
-                if (bestAnt.distance == ants[i].distance) {
+                if (bestAnt.distance > ants[i].distance) {
                     bestAnt = ants[i];
                     break;
                 }
@@ -80,11 +76,11 @@ function main() {
     }
 
     console.log('there is %d ant at end', ants.length);
+    console.log('createRandomGeneration time %d', timers.getTime(1));
     //printAnts();
     ants = [];
     ants.push(bestAnt);
-    printBestAnts();
-
+    bestAnt.println();
 }
 
 main();

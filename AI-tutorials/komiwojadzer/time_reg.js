@@ -7,10 +7,10 @@ class TimeRegister {
        }
     }
     start(id){
-        this.timeStart[id] = new Date().getTime();
+        this.timeStart[id] = Date.now();
     }
     stop(id){
-        this.timers[id] += new Date().getTime() - this.timeStart[id];
+        this.timers[id] += Date.now() - this.timeStart[id];
     }
     getTime(id){
         return this.timers[id]/1000;
