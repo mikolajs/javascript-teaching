@@ -36,6 +36,7 @@ class Animal {
     this.destination = new HexPoint(-1, -1);
     this.distance = 0;
     this.out = false;
+    this.delta = 0.0; //temporary - change to creata move 
   }
   printAnimal(){
     console.log('%s on row %d col %d', this.name, this.Row, this.Col);
@@ -65,12 +66,16 @@ class Animal {
       } else {
         animation = new PIXI.AnimatedSprite(resources['deer_'+this.dir].spritesheet.animations['deer_'+this.dir]);
       }
-      animation.anchor.set(this.anchors[i][0] + this.delta*this.moveDir[0], this.anchors[i][1] + this.delta*this.moveDir[1]);
+      //this.anchors[i][0] + this.delta*this.moveDir[0], this.anchors[i][1] + this.delta*this.moveDir[1]
+      animation.anchor.set(this.anchors[i][0] - this.delta*this.moveDir[0] , this.anchors[i][1] - this.delta*this.moveDir[1]);
+      //console.log(animation.anchor);
+      //console.log('delta %f, x %f y %f',this.delta, this.delta*this.moveDir[0], this.delta*this.moveDir[1]);
       animation.x = position.x;
       animation.y = position.y;
       animation.scale.x = 0.5;
       animation.scale.y = 0.5;
       animation.animationSpeed = 0.1;
+      //console.log(animation);
       sprites.push(animation);
     }
     return sprites;

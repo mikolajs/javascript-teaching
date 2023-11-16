@@ -101,9 +101,12 @@ class MapWorld {
         //const animatedSprite = new PIXI.AnimatedSprite(this.resources['deer_i'].spritesheet.animations['idle']);
         //animal.setCenter(p);
         //animal.setAnimationSprite(animatedSprite);
+        //console.log(animal);
+        console.log(p);
         let allSprites = animal.createAnimationHerd(this.resources, p);
-        //console.log('deers sprites %d', allSprites.length);
+        console.log('deers sprites %d', allSprites.length);
         for(let i in allSprites){
+          //console.log(allSprites[i]);
           this.container.addChild(allSprites[i]);
           allSprites[i].gotoAndPlay(i*2);
         }
