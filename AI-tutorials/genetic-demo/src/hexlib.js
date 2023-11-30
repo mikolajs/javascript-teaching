@@ -1,3 +1,4 @@
+
 let HexLibrary,PathFinder,Hex;
 (function(){
 'use strict';var f,aa=Object.freeze({esVersion:6,assumingES6:!0,productionMode:!0,linkerVersion:"1.13.2",fileLevelThis:this}),ba;function ca(a){for(var b in a)return b}function ea(a){this.jf=a}ea.prototype.toString=function(){return String.fromCharCode(this.jf)};var ha=function fa(a,b,c){var e=new a.M(b[c]);if(c<b.length-1){a=a.Sc;c+=1;for(var g=e.a,h=0;h<g.length;h++)g[h]=fa(a,b,c)}return e};
@@ -288,3 +289,4 @@ f.l=function(a){return this.k(a|0)};f.$classData=A({gg:0},"scala.collection.muta
 Ab.prototype.$classData=A({Hj:0},"scala.collection.mutable.Stack",{Hj:1,gg:1,ze:1,Na:1,G:1,t:1,b:1,s:1,h:1,v:1,i:1,u:1,I:1,F:1,D:1,y:1,m:1,Qa:1,Pa:1,Ra:1,Oa:1,xa:1,Be:1,bb:1,ab:1,Ce:1,ef:1,Ta:1,L:1,H:1,Ua:1,P:1,O:1,lj:1,fb:1,c:1});ba=new n(0,0);Va.Hc=ba;HexLibrary=function(a,b){return new sb(a,b)};PathFinder=function(a){return new wd(a)};Hex=function(a,b){return new vd(a|0,b|0)};
 }).call(this);
 //# sourceMappingURL=main.js.map
+module.exports.hexlib = { HexLibrary, Hex, PathFinder};

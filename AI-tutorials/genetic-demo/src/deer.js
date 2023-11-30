@@ -1,6 +1,6 @@
 
 
-class Deer {
+module.exports = class Deer {
   constructor() {
     this.speed = 10;
     this.mass = 10;
@@ -23,17 +23,14 @@ class Deer {
   print(){
     console.log('Deer speed %d and mass %d', this.speed, this.mass);
   }
-}
-
-function test1() {
-  const deer = new Deer();
-  for(let i = 0; i <  20; i++){
-  deer.mutate();
-  deer.print();
-  if(deer.mass < 9) console.log('Error: mass');;
-  if(deer.mass > 20) console.log('Error: mass');;
-  if(deer.speed < 9) console.log('Error: speed');;
-  if(deer.speed> 20) console.log('Error: speed');;
+  test() {
+    for(let i = 0; i <  20; i++){
+    this.mutate();
+    this.print();
+    if(this.mass < 10) console.log('Error: mass');;
+    if(this.mass > 20) console.log('Error: mass');;
+    if(this.speed < 10) console.log('Error: speed');;
+    if(this.speed> 20) console.log('Error: speed');;
+    }
   }
 }
-test1();
