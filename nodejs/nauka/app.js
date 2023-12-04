@@ -1,9 +1,15 @@
 const http = require('http');
 const dt = require('./myfirstmodule');
-const url = require('url');
 const hostname = '127.0.0.1';
 const port = 3000;
 const fs = require('fs');
+const mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "uczen",
+  password: "qwerty"
+});
 
 let nameFile = 'datafile.txt';
 
