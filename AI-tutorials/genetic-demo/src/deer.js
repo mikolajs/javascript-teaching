@@ -1,7 +1,9 @@
 
 
 module.exports = class Deer {
-  constructor() {
+  constructor(r, c) {
+    this.r = r;
+    this.c = c;
     this.speed = 10;
     this.mass = 10;
     let add = Math.ceil(Math.random()*10);

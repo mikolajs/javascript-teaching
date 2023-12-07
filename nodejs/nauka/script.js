@@ -2,7 +2,7 @@ function save(){
   let d = document.getElementById('dane').value;
   console.log(d);
   let req = new XMLHttpRequest();
-  req.open('POST', 'http://127.0.0.1:3000/savefile', false);
+  req.open('POST', 'http://localhost:3000/savefile', false);
   req.onreadystatechange = (e) => {
      if (req.readyState == 4) {
      if(req.status == 200)
@@ -15,7 +15,7 @@ function save(){
 
 function load(){
   let req = new XMLHttpRequest();
-  req.open('POST', 'http://127.0.0.1:3000/loadfile', false);
+  req.open('POST', 'http://localhost:3000/loadfile', false);
   req.onreadystatechange = (e) => {
      if (req.readyState == 4) {
      if(req.status == 200) {

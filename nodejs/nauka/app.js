@@ -1,6 +1,6 @@
 const http = require('http');
 const dt = require('./myfirstmodule');
-const hostname = '127.0.0.1';
+const hostname = 'localhost';
 const port = 3000;
 const fs = require('fs');
 const mysql = require('mysql');
@@ -11,6 +11,7 @@ var con = mysql.createConnection({
   password: 'Qw3rtyzaq!',
   database: 'nodejs'
 });
+//con.connect();
 
 let nameFile = 'datafile.txt';
 /*
@@ -73,7 +74,7 @@ const server = http.createServer((req, res) => {
       let json = JSON.parse(data);
       values.push([json.eng, json.rus, json.pol]);
       console.log(values);
-      con.connect( (err) => {
+      //con.connect( (err) => {
         con.query('INSERT INTO dictionary (eng, rus, pol) VALUES ?', [values],
         (err, result) => {
           if(err) {
@@ -85,16 +86,19 @@ const server = http.createServer((req, res) => {
             res.write('ok');
           }
         });
-      });
+     // });
     });
   } else if(req.url == '/getDict') { 
-      con.connect( (err) => {
-        if(err) throw err;
+      //con.connect( (err) => {
+       // if(err) {
+       //   console.log('Second shake?');
+       //   console.log(err);
+      //  }
         con.query('SELECT eng, rus, pol FROM dictionary', (err, result, fields) => {
           let data = {};
           data.rows = [];
-          console.log(result);
-          console.log(fields);
+          //console.log(result);
+          //console.log(fields);
           if(err) {
             console.log(err);
             res.writeHead(406, { 'Content-Type': 'text/json' });
@@ -110,7 +114,7 @@ const server = http.createServer((req, res) => {
           res.write(JSON.stringify(data));
           return res.end();
         });
-      });
+   //   });
   } else {
     fs.readFile('index.html', function (err, data) {
       res.writeHead(200, { 'Content-Type': 'text/html' });

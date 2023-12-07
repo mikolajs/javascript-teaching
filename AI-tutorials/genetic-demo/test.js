@@ -7,5 +7,6 @@ const hexlib = require('./src/hexlib.js');
 const deer = new Deer();
 const wolf = new Wolf();
 const world = new TheWorld();
-deer.test();
-wolf.test();
+//deer.test();
+//wolf.test();
+world.printWorld();

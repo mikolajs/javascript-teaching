@@ -9,13 +9,22 @@
   <h1>Słownik obrazkowy: angielsko-rosyjsko-polski</h1>
   <fieldset>
     <table>
-      <thead><th>English</th><th>Русский</th><th>Polski</th><th>Zatwierdź</th></thead>
-      <tbody><td> <input type="text" id="inEng"></td><td> <input type="text" id="inRus"></td>
-        <td> <input type="text" id="inPol"></td><td> <input type="file" id="inEng"></td>
-      <td><button onclick="saveData();">Zatwierdź</button></td></tbody>
+      <thead><tr><th>English</th><th>Русский</th><th>Polski</th><th>Zatwierdź</th></tr></thead>
+      <tbody><tr><td> <input type="text" id="inEng"></td><td> <input type="text" id="inRus"></td>
+        <td> <input type="text" id="inPol"></td>
+      <td><button onclick="saveData();">Zatwierdź</button></td></tr></tbody>
     </table>
-   
   </fieldset>
+  <div>
+    <table>
+      <thead><tr><th>English</th><th>Русский</th><th>Polski</th></tr></thead>
+      <tbody id="dictionaryTable">
+
+      </tbody>
+      <tfoot><tr><th>English</th><th>Русский</th><th>Polski</th></tr></tfoot>
+    </table>
+  </div>
   <script src="slownik.js"></script>
+  <script>readData();</script>
 </body>
 </html>

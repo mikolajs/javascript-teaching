@@ -7,7 +7,7 @@ module.exports = class MapGenerator {
    this.mo = 0.03;
    this.hi = 0.06;//not counted this from around mounts
    this.st = 0.15;
-   this.wd = 0.1;
+   this.wd = 0.1; //water ??? why wd?
    this.fo = preferences.woods/100.0;
    console.log("generator: " + preferences.woods);
    this.arr = new Array(this.R).fill(0).map(row => new Array(this.C).fill('pl'));
