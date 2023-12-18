@@ -6,9 +6,11 @@ module.exports = class Deer {
     this.c = c;
     this.speed = 10;
     this.mass = 10;
+    this.herdSize = 14;
     let add = Math.ceil(Math.random()*10);
     this.speed += add;
     this.mass += 10 - add;
+    this.isMoving = false;
   }  
   mutate(){
     let change = Math.floor(Math.random()*5) - 2;

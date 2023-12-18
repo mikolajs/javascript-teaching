@@ -12,9 +12,9 @@ module.exports = class MapGenerator {
    console.log("generator: " + preferences.woods);
    this.arr = new Array(this.R).fill(0).map(row => new Array(this.C).fill('pl'));
    this.plants = new Array(this.R).fill(0).map(row => new Array(this.C).fill(''));
-   let hex = hexlib.hexlib.Hex(this.R, this.C);
-   let pathFinder = hexlib.hexlib.PathFinder(hex);
-   this.hexLibrary = new hexlib.hexlib.HexLibrary(hex, pathFinder);
+   let hex = hexlib.Hex(this.R, this.C);
+   let pathFinder = hexlib.PathFinder(hex);
+   this.hexLibrary = new hexlib.HexLibrary(hex, pathFinder);
    this._makeMountains();
    this._makeRandom('hi');
    this._makeRandom('st');
