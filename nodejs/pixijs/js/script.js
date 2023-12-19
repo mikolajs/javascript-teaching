@@ -1,6 +1,7 @@
 
 class Main {
   constructor() {
+    this.step = 0;
     let type = 'WebGl';
     if (!PIXI.utils.isWebGLSupported()) {
       type = "canvas";
@@ -11,19 +12,22 @@ class Main {
       heigh: 600
     });
     document.body.appendChild(this.app.view);
-    const flake = PIXI.Sprite.from('img/snowflakesmall.png');
-    //const flake = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
-    this.setup(flake);
+    
+    const spark = PIXI.Sprite.from('img/spark.png');
+    
+    this.setup();
+    this.stars = new Stars(40, 800, 600);
+    this.app.stage.addChild(this.stars.getContainer());
+    this.snow = new Snow(50, 800, 600);
+    this.app.stage.addChild(this.snow.getContainer());
   }
 
-  setup(flake){
-    flake.anchor.set(0.5);
-    flake.x = 400;
-    flake.y = 0;
-    this.app.stage.addChild(flake);
+  setup(){
+    
     this.app.ticker.add((delta) => {
-      flake.y += 1;
-      flake.x += (Math.random() - 0.5);
+      this.step++;
+      if(this.step % 2 == 1) this.snow.move(delta);
+      if(this.step % 10 == 0) this.stars.makeRotation(delta);
   });
   }
 
