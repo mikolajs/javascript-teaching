@@ -1,0 +1,57 @@
+{"frames": {
+
+"snowmen1.png":
+{
+	"frame": {"x":0,"y":0,"w":200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":244},
+	"sourceSize": {"w":200,"h":244},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"snowmen2.png":
+{
+	"frame": {"x":200,"y":0,"w":200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":244},
+	"sourceSize": {"w":200,"h":244},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"snowmen3.png":
+{
+	"frame": {"x":400,"y":0,"w":200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":244},
+	"sourceSize": {"w":200,"h":244},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"snowmen4.png":
+{
+	"frame": {"x":600,"y":0,"w":200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":244},
+	"sourceSize": {"w":200,"h":244},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"snowmen5.png":
+{
+	"frame": {"x":800,"y":0,"w":200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":244},
+	"sourceSize": {"w":200,"h":244},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "snowman.png",
+	"format": "RGBA8888",
+	"size": {"w":1000,"h":244},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:66a4ffce409482455a4da0ba7a9ec605:6024d562a65839dcc5ca0155d87eaf8a:97365287be0f39d292457a96b7527d3c$"
+}
+}

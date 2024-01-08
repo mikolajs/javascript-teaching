@@ -6,7 +6,6 @@ class Main {
     if (!PIXI.utils.isWebGLSupported()) {
       type = "canvas";
     }
-    PIXI.utils.sayHello(type);
     this.X = 1232;
     this.Y = 608;
     this.unitSize = 6;
