@@ -33,7 +33,18 @@ class Main {
     this.snow = new Snow(50, 800, 600);
     this.app.stage.addChild(this.snow.getContainer());
     this.rabbit = new Rabbit(800, 600, this);
-   
+    this.moveRabbit = false;
+    this.snowmantime = 0;
+    this.snowman = new Snowman(800, 600, this);
+    this.app.stage.eventMode = 'static';
+    this.app.stage.cursor = 'pointer';
+    //let self = this;
+    this.app.stage.on('pointerdown', () =>{
+      if(this.moveRabbit == false){
+        this.rabbit.setZero();
+        this.moveRabbit = true;
+      }
+    }); 
   }
 
   insertAnimation(anim){
@@ -47,12 +58,19 @@ class Main {
       this.step++;
       if(this.step % 2 == 1) this.snow.move(delta);
       if(this.step % 10 == 0) this.stars.makeRotation(delta);
-  });
+      if(this.moveRabbit) this.rabbit.move(delta);
+      if(this.snowman.animateSnowman) {
+        this.snowman.anim.play();
+      } else {
+        this.snowmantime += delta;
+        if(this.snowmantime > 10000){
+          this.snowman.animateSnowman = false;
+          this.snowman.anim.stop();
+
+        }
+      }
+    });
   }
 
 }
-
-
-
-
 

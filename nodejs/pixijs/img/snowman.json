@@ -1,6 +1,6 @@
 {"frames": {
 
-"snowmen1.png":
+"snowman1.png":
 {
 	"frame": {"x":0,"y":0,"w":200,"h":244},
 	"rotated": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":200,"h":244},
 	"anchor": {"x":0.5,"y":0.5}
 },
-"snowmen2.png":
+"snowman2.png":
 {
 	"frame": {"x":200,"y":0,"w":200,"h":244},
 	"rotated": false,
@@ -18,7 +18,7 @@
 	"sourceSize": {"w":200,"h":244},
 	"anchor": {"x":0.5,"y":0.5}
 },
-"snowmen3.png":
+"snowman3.png":
 {
 	"frame": {"x":400,"y":0,"w":200,"h":244},
 	"rotated": false,
@@ -27,7 +27,7 @@
 	"sourceSize": {"w":200,"h":244},
 	"anchor": {"x":0.5,"y":0.5}
 },
-"snowmen4.png":
+"snowman4.png":
 {
 	"frame": {"x":600,"y":0,"w":200,"h":244},
 	"rotated": false,
@@ -36,7 +36,7 @@
 	"sourceSize": {"w":200,"h":244},
 	"anchor": {"x":0.5,"y":0.5}
 },
-"snowmen5.png":
+"snowman5.png":
 {
 	"frame": {"x":800,"y":0,"w":200,"h":244},
 	"rotated": false,
