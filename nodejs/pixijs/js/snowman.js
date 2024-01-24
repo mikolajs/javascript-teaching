@@ -22,7 +22,9 @@ class Snowman {
       //let self = this;
       this.anim.on('pointerdown', () =>{
         if(this.animateSnowman == false){
+          console.log('make animate Snoman');
           this.animateSnowman = true;
+          this.anim.gotoAndPlay(0);
         }
       }); 
       });

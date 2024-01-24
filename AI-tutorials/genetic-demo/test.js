@@ -11,9 +11,10 @@ const world = new TheWorld();
 const deerMoving = new DeerMoving(world);
 //deer.test();
 //wolf.test();
-for(let i = 0; i < 10; i++){
+for(let i = 0; i < 50; i++){
   world.printWorld();
   deerMoving.nextTurn();
   console.log('%d :----------------------------------------------------------------------------', i);
+  if(i % 10 == 0) deerMoving.bornNew();
   execSync('sleep 1');
 }

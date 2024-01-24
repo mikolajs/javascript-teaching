@@ -49,7 +49,6 @@ class Main {
 
   insertAnimation(anim){
     this.app.stage.addChild(anim);
-    anim.play();
   }
 
   setup(){
@@ -60,13 +59,12 @@ class Main {
       if(this.step % 10 == 0) this.stars.makeRotation(delta);
       if(this.moveRabbit) this.rabbit.move(delta);
       if(this.snowman.animateSnowman) {
-        this.snowman.anim.play();
-      } else {
         this.snowmantime += delta;
-        if(this.snowmantime > 10000){
+        //console.log('snowmantime = ' + this.snowmantime);
+        if(this.snowmantime > 550){
           this.snowman.animateSnowman = false;
           this.snowman.anim.stop();
-
+          this.snowmantime = 0;
         }
       }
     });

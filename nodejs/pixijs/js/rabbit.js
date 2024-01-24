@@ -16,6 +16,7 @@ class Rabbit {
       this.anim.anchor.set(0, 1);
       this.anim.animationSpeed = 0.5;
       main.insertAnimation(this.anim);
+      this.anim.play();
       });
       
   }

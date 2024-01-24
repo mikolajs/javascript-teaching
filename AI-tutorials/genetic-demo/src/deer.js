@@ -11,6 +11,8 @@ module.exports = class Deer {
     this.speed += add;
     this.mass += 10 - add;
     this.isMoving = false;
+    this.id = 1;
+    this.energy = 100;
   }  
   mutate(){
     let change = Math.floor(Math.random()*5) - 2;
@@ -25,7 +27,8 @@ module.exports = class Deer {
     }
   }
   print(){
-    console.log('Deer speed %d and mass %d', this.speed, this.mass);
+    console.log('Deer (%d, %d), size=%d, moving=%s, speed=%d, mass=%d, !%d', 
+    this.r, this.c, this.herdSize, this.isMoving, this.speed, this.mass, this.energy);
   }
   test() {
     for(let i = 0; i <  20; i++){
