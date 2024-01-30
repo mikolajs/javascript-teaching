@@ -28,6 +28,7 @@ module.exports = class DeerMoving {
         this.keepMoving(this.deers[i]);
       } else {
         let hexPoint = this.eatOrGo(this.deers[i]);
+        //console.log(hexPoint);
         if(hexPoint.r == this.deers[i].r && hexPoint.c == this.deers[i].c) this.keepEat(this.deers[i]);
         else this.startMove(this.deers[i], hexPoint);
       }
@@ -38,25 +39,26 @@ module.exports = class DeerMoving {
     console.log(this.world.food[deer.r][deer.c]);
     if(this.world.food[deer.r][deer.c] >= deer.herdSize) return HexPoint.create(deer.r, deer.c);
     else {
-      let neighbours = this.hex.neighbours(deer.r, deer.r, 1);
+      let neighbours = this.hex.neighbours(deer.r, deer.c, 1);
       let max = this.world.food[deer.r][deer.c];
       let i = -1;
       let maxI = -1;
       for(let ng of neighbours){
         i++;
-        if(this.world.food[ng[0]][ng[1]] > max) {
+        if(this.world.animalsArray[ng[0]][ng[1]]) continue;
+        else if(this.world.food[ng[0]][ng[1]] > max) {
           max = this.world.food[ng[0]][ng[1]];
           maxI = i;
         }
       }
-      if(maxI < 0) return HexPoint,create(deer.r, deer.c);
-      else return neighbours[maxI];
+      if(maxI < 0) return HexPoint.create(deer.r, deer.c);
+      else return HexPoint.create(neighbours[maxI][0], neighbours[maxI][1]);
     }
     //console.log(neighbours);
     //return true;
   }
   keepEat(deer){
-    console.log('keep eat');
+    //console.log('keep eat');
     if(this.world.food[deer.r][deer.c] >= deer.herdSize) {
       this.world.food[deer.r][deer.c] -= deer.herdSize;
       deer.energy += 10;
@@ -67,10 +69,22 @@ module.exports = class DeerMoving {
     }
   }
   keepMoving(deer){
-
+    deer.distanceToDestination -= deer.speed;
+    deer.energy -= Math.floor((deer.mass+deer.speed)/10);
+    if(deer.distanceToDestination <= 0) {
+      deer.isMoving = false;
+      deer.distanceToDestination = 0;
+    }
   }
-  startMove(deer){
-    console.log('start move')
+  startMove(deer, hexPoint){
+    console.log('start move to (%d, %d)', hexPoint.r, hexPoint.c);
+    deer.goFrom = HexPoint.create(deer.r, deer.c);
+    this.world.animalsArray[deer.r][deer.c] = false;
+    deer.r = hexPoint.r;
+    deer.c = hexPoint.c;
+    this.world.animalsArray[hexPoint.r][hexPoint.c] = true;
+    deer.isMoving = true;
+    deer.distanceToDestination = 60;
   }
   checkAlive(deer){
     deer.energy -= 1;
@@ -83,8 +97,8 @@ module.exports = class DeerMoving {
     for(let i = 0; i < this.deers.length; i++){
       if(this.deers[i].energy > 50){
         this.deers[i].herdSize += Math.ceil(Math.sqrt(this.deers[i].herdSize));
-        if(this.deers[i].herdSize > 60){
-          this.splitToNewHerd(deer);
+        if(this.deers[i].herdSize > 30){
+          this.splitToNewHerd(this.deers[i]);
         }
       }
 
@@ -92,6 +106,6 @@ module.exports = class DeerMoving {
     }
   }
   splitToNewHerd(deer){
-
+    console.log('split herd');
   }
 }

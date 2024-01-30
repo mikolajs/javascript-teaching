@@ -12,6 +12,7 @@ module.exports = class TheWorld {
     let generator = new MapGenerator(this.Row, this.Col, preferences);
     this.plants = generator.getPlants();
     this.worldTiles = generator.getMap();
+    this.animalsArray = new Array(this.Row).fill(0).map(row => new Array(this.Col).fill(false));
     this.food = new Array(this.Row).fill(0).map(row => new Array(this.Col).fill(0));
     this.animals = [];
     this._fillFood();
@@ -26,6 +27,7 @@ module.exports = class TheWorld {
       let r = Math.floor(Math.random()*this.Row);
       if(this.plants[r][c] == 'gr' || this.plants[r][c] == 'wd') {
         this.animals.push(new Deer(r, c));
+        this.animalsArray[r][c] = true;
         nr--;
       }
     }
@@ -65,6 +67,10 @@ module.exports = class TheWorld {
       }
     }
   }
+
+growPlants(){
+  this._growGrass();
+}
 
   printWorld(){
     let line = '';
