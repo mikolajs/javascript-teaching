@@ -7,6 +7,8 @@ module.exports = class Deer {
     this.speed = 10;
     this.mass = 10;
     this.herdSize = 10;
+    this.children = 0;
+    this.timeToGrowUp = 0;
     let add = Math.ceil(Math.random()*10);
     this.speed += add;
     this.mass += 10 - add;
@@ -29,8 +31,8 @@ module.exports = class Deer {
     }
   }
   print(){
-    console.log('Deer (%d, %d), size=%d, moving=%s, speed=%d, mass=%d, !%d', 
-    this.r, this.c, this.herdSize, this.isMoving, this.speed, this.mass, this.energy);
+    console.log('Deer (%d, %d), size=%d (*%d), mov=%s, speed=%d, mass=%d, !%d', 
+    this.r, this.c, this.herdSize, this.children, this.isMoving, this.speed, this.mass, this.energy);
   }
   test() {
     for(let i = 0; i <  20; i++){

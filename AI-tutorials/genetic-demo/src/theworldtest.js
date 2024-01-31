@@ -10,11 +10,11 @@ module.exports = class TheWorld {
     this.Row = 30;
     this.Col = 30;
     let generator = new MapGenerator(this.Row, this.Col, preferences);
+    this.deers = [];
     this.plants = generator.getPlants();
     this.worldTiles = generator.getMap();
     this.animalsArray = new Array(this.Row).fill(0).map(row => new Array(this.Col).fill(false));
     this.food = new Array(this.Row).fill(0).map(row => new Array(this.Col).fill(0));
-    this.animals = [];
     this._fillFood();
     this._randomAnimals(10);
   }
@@ -26,12 +26,12 @@ module.exports = class TheWorld {
       let c = Math.floor(Math.random()*this.Col);
       let r = Math.floor(Math.random()*this.Row);
       if(this.plants[r][c] == 'gr' || this.plants[r][c] == 'wd') {
-        this.animals.push(new Deer(r, c));
+        this.deers.push(new Deer(r, c));
         this.animalsArray[r][c] = true;
         nr--;
       }
     }
-    //for(let a of this.animals) a.print();
+    //for(let a of this.deers) a.print();
   }
 
   _fillFood() {
@@ -96,9 +96,9 @@ growPlants(){
   }
 
   _findIfAnimalIsHere(r, c){
-    for(let i = 0; i < this.animals.length; i++){
+    for(let i = 0; i < this.deers.length; i++){
       
-      if(this.animals[i].r == r && this.animals[i].c == c) {
+      if(this.deers[i].r == r && this.deers[i].c == c) {
         //console.log(this.animals[i]);
         return i;
       }

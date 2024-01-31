@@ -11,12 +11,15 @@ const world = new TheWorld();
 const deerMoving = new DeerMoving(world);
 //deer.test();
 //wolf.test();
-for(let i = 0; i < 100; i++){
-  console.log('%d :----------------------------------------------------------------------------', i);
+for(let i = 0; i < 500; i++){
   //world.printWorld();
   deerMoving.nextTurn();
+  if(i % 10 == 0) {
+    console.log('%d :----------------------------------------------------------------------', i);
+    deerMoving.printAnimals();
+  }
   if(i+1 % 12 == 0) world.growPlants();
-  if(i % 10 == 0) deerMoving.bornNew();
-  execSync('sleep 0.1');
+  if(i % 5 == 0) deerMoving.bornNew();
+  execSync('sleep 0.01');
 }
 world.printWorld();
