@@ -1,11 +1,23 @@
 
 module.exports = class Wolf {
-  constructor() {
+  constructor(r, c) {
     this.speed = 10;
     this.mass = 5;
     let add = Math.ceil(Math.random()*10);
     this.speed += add;
     this.mass += 10 - add;
+    this.energy = 100;
+    this.herdSize = 12;
+    this.children = 0;
+    this.timeToGrowUp = 0;
+    this.isMoving = false;
+    this.isEating = false;
+    this.toEatFood = 0;
+    this.id = 2;
+    this.r = r;
+    this.c = c;
+    this.distanceToDestination = 0;
+    this.goFrom;
   }  
   mutate(){
     let change = Math.floor(Math.random()*5) - 2;
@@ -20,7 +32,8 @@ module.exports = class Wolf {
     }
   }
   print(){
-    console.log('Wolf speed %d and mass %d', this.speed, this.mass);
+    console.log('Wolf (%d, %d), size=%d (*%d), mov=%s, speed=%d, mass=%d, !%d', 
+    this.r, this.c, this.herdSize, this.children, this.isMoving, this.speed, this.mass, this.energy);
   }
   test() {
     for(let i = 0; i <  20; i++){

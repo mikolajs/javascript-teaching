@@ -14,7 +14,7 @@ module.exports = class Deer {
     this.mass += 10 - add;
     this.isMoving = false;
     this.id = 1;
-    this.energy = 100;
+    this.energy = 50;
     this.distanceToDestination = 0;
     this.goFrom;
   }  

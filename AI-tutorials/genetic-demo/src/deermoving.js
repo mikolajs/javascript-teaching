@@ -25,6 +25,7 @@ module.exports = class DeerMoving {
   nextTurn(){
     for(let i in this.world.deers){
       //this.world.deers[i].print();
+      this.world.deers[i].energy -= Math.ceil(this.world.deers[i].mass/15);
       if(this.world.deers[i].isMoving){
         this.keepMoving(this.world.deers[i]);
       } else {
@@ -33,9 +34,18 @@ module.exports = class DeerMoving {
         if(hexPoint.r == this.world.deers[i].r && hexPoint.c == this.world.deers[i].c) this.keepEat(this.world.deers[i]);
         else this.startMove(this.world.deers[i], hexPoint);
       }
-      this.checkAlive(this.world.deers[i]);
+    }
+  }
+  nextDay(){
+    for(let i in this.world.deers) {
+        this.checkAlive(this.world.deers[i]);
+        if(this.world.deers[i].isMoving){
+          this.world.deers[i].isMoving = false;
+          this.world.deers[i].distanceToDestination = 0;
+        }
     }
     this._removeDeath();
+    this.bornNew();  
   }
   eatOrGo(deer){
     //console.log(this.world.food[deer.r][deer.c]);
@@ -43,7 +53,7 @@ module.exports = class DeerMoving {
     else {
       let neighbours = this.hex.neighbours(deer.r, deer.c, 1);
       let max = this.world.food[deer.r][deer.c];
-      let maxI = this._findMaxNeighbourFood(neighbours, deer);
+      let maxI = this._findMaxNeighbourFood(neighbours, deer, max);
       if(maxI < 0) return HexPoint.create(deer.r, deer.c);
       else return HexPoint.create(neighbours[maxI][0], neighbours[maxI][1]);
     }
@@ -56,12 +66,13 @@ module.exports = class DeerMoving {
     if(startMax > 0) max = this.world.food[deer.r][deer.c];
     let maxI = -1;
     for(let i = 0; i < ng.length; i++){
-      if(this.world.animalsArray[ng[i][0]][ng[i][1]]) continue;
+      if(this.world.animalsArray[ng[i][0]][ng[i][1]].e) continue;
       else if(this.world.food[ng[i][0]][ng[i][1]] > max) {
         max = this.world.food[ng[i][0]][ng[i][1]];
         maxI = i;
       }
     }
+    if(max < deer.herdSize/2) return Math.floor(Math.random()*ng.length);
     return maxI;
   }
   keepEat(deer){
@@ -69,16 +80,16 @@ module.exports = class DeerMoving {
     //console.log('keep eat');
     if(this.world.food[deer.r][deer.c] >= deer.herdSize) {
       this.world.food[deer.r][deer.c] -= deer.herdSize;
-      deer.energy += 10;
+      deer.energy += 5;
     } else {
       let percentFood = this.world.food[deer.r][deer.c]/deer.herdSize;
       this.world.food[deer.r][deer.c] = 0;
-      deer.energy += Math.round(10*percentFood);
+      deer.energy += Math.round(5*percentFood);
     }
   }
   keepMoving(deer){
     deer.distanceToDestination -= deer.speed;
-    deer.energy -= Math.floor((deer.mass+deer.speed)/10);
+    deer.energy -= Math.ceil((deer.mass+deer.speed)/15);
     if(deer.distanceToDestination <= 0) {
       deer.isMoving = false;
       deer.distanceToDestination = 0;
@@ -87,18 +98,20 @@ module.exports = class DeerMoving {
   startMove(deer, hexPoint){
     //console.log('start move to (%d, %d)', hexPoint.r, hexPoint.c);
     deer.goFrom = HexPoint.create(deer.r, deer.c);
-    this.world.animalsArray[deer.r][deer.c] = false;
+    //console.log(this.world.animalsArray[deer.r][deer.c]);
+    this.world.animalsArray[deer.r][deer.c].e = false;
     deer.r = hexPoint.r;
     deer.c = hexPoint.c;
-    this.world.animalsArray[hexPoint.r][hexPoint.c] = true;
+    this.world.animalsArray[hexPoint.r][hexPoint.c].e = true;
+    this.world.animalsArray[hexPoint.r][hexPoint.c].t = 1;
     deer.isMoving = true;
     deer.distanceToDestination = 60;
   }
   checkAlive(deer){
-    deer.energy -= 1;
     if(deer.energy < 0){
-      deer.herdSize -= 1;
-      if(deer.children > 0) deer.children -= 1;
+      let toDie = Math.ceil(deer.herdSize*0.1);
+      deer.herdSize -= toDie;
+      if(deer.children > 0) deer.children -= toDie;
       deer.energy = 0;
     }
   }
@@ -117,11 +130,11 @@ module.exports = class DeerMoving {
         if(this.world.deers[i].timeToGrowUp == 0){
           this.world.deers[i].children = 0;
         }
-      } else if(this.world.deers[i].energy > 50){
+      } else if(this.world.deers[i].energy > 40){
         let newChildren = Math.ceil((Math.random()+2)*(Math.ceil(this.world.deers[i].herdSize/6.0)));
         this.world.deers[i].herdSize += newChildren;
         this.world.deers[i].children = newChildren;
-        this.world.deers[i].timeToGrowUp = 15;
+        this.world.deers[i].timeToGrowUp = 10;
         if(this.world.deers[i].herdSize > 32){
           this.splitToNewHerd(this.world.deers[i]);
         }
@@ -131,12 +144,15 @@ module.exports = class DeerMoving {
   splitToNewHerd(deer){
     //console.log('split herd');
     let neighbours = this.hex.neighbours(deer.r, deer.c, 1).filter((n) => {
-      return (this.world.animalsArray[n[0]][n[1]] == false && this.world.worldTiles[n[0]][n[1]] != 'hi');
+      return (this.world.animalsArray[n[0]][n[1]].e == false && 
+        this.world.worldTiles[n[0]][n[1]] != 'hi' &&
+        this.world.worldTiles[n[0]][n[1]] != 'wd');
     });
     //console.log(neighbours);
     let maxI = this._findMaxNeighbourFood(neighbours, deer, 0);
-    //console.log(maxI);
-    if(maxI > -1){
+    if(maxI > -1 && neighbours.length > 0){
+      //deer.print();
+      //console.log(neighbours);
       let newDeer = new Deer(neighbours[maxI][0], neighbours[maxI][1]);
       newDeer.herdSize = Math.floor(deer.herdSize/2);
       deer.herdSize = Math.ceil(deer.herdSize/2);
@@ -159,5 +175,12 @@ module.exports = class DeerMoving {
     for(let i = 0; i < this.world.deers.length; i++){
       this.world.deers[i].print();
     }
+  }
+  printInfo(){
+    let numberOfDeers = 0;
+    for(let i = 0; i < this.world.deers.length; i++){
+      numberOfDeers += this.world.deers[i].herdSize;
+    }
+    console.log('Size of heards: %d, deers: ', this.world.deers.length, numberOfDeers);
   }
 }
