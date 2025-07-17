@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zdjęcia do legitymacji XX LO</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div>
+                <label for="fname" class="form-label">Imię:
+                    <input type="text" name="fname" id="fname" class="form-control">
+                </label>
+            </div>
+            <div>
+                <label for="sname" class="form-label">Nazwisko:
+                    <input type="text" name="sname" id="sname" class="form-control">
+                </label>
+            </div>
+            <div>
+                <label for="pesel" class="form-label">PESEL:
+                    <input type="text" name="pesel" id="pesel" maxlength="11" class="form-control">
+                </label>
+            </div>
+            <div>
+                <label for="" class="form-label"> Wczytaj zdjęcie:
+                    <input type="file" id="foto" name="avatar" class="form-control" accept="image/png, image/jpeg"
+                        onchange="loadFile(this);" />
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="Sprawdź" class="btn btn-lg btn-secondary">
+            </div>
+        </div>
+        <div class="col">
+            <img src="blank.png" alt="" id="currentFoto">
+        </div>
+
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col">
+            <canvas id="canvasEditor" width="350" height="450" style="border: 2px solid black;"></canvas>
+        </div>
+
+        <div class="col">
+            <div>
+                <br>
+                <button class="btn btn-lg btn-success" onclick="mkSmaller();"><b>–</b></button>
+                <button class="btn btn-lg btn-info">
+                    <span id="rescale">100</span>%
+                </button> 
+                <button class="btn btn-lg btn-success" onclick="mkBigger();"><b>+</b></button>
+            </div>
+            <br>
+            <input type="submit" value="Zatwierdź" class="btn btn-lg btn-primary">
+        </div>
+    </div>
+</div>
+    <br>
+    <hr>
+    <br>
+    <script src="foto.js"></script>
+</body>
+
+</html>

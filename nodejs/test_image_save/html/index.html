@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/slownik.ico" type="image/x-icon">
+  <title>Słownik</title>
+</head>
+<body>
+  <fieldset>
+    <label for="eng">Eng:</label><input type="text" id="eng">
+    <label for="pol">Pol:</label><input type="text" id="pol">
+    <label for="nie">Rus:</label><input type="text" id="rus">
+    <button onclick="dodaj();">Dodaj</button>
+  </fieldset>
+  <table>
+    <thead><tr><th>Eng</th><th>Pol</th><th>Ros</th><th>Usuń</th></tr></thead>
+    <tbody id="zawartosc"></tbody>
+  </table>
+
+  <script src="js/slownik.js"></script>
+  <script>wczytaj();</script>
+</body>
+</html>
